@@ -118,7 +118,7 @@ const tabOmegaElements = makeElementMap('oBase', 'oAlpha', 'oBeta', 'oGamma', 'o
 function hideElements(elements) {
     for (const name in elements) { elements[name].style.display = 'none' }
 }
-export function openTab(tab) {
+window.openTab = function (tab) {
     if(tab in tabOmegaElements) { hideElements(tabOmegaElements) }
     else { hideElements(tabElements) }
     document.getElementById(tab).style.display = 'block';

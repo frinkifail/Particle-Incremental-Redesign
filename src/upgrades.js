@@ -51,7 +51,7 @@ export function scaleGen(upgradeName) {
     }
 }
 
-export function buyUpgrade(upgradeName) {
+window.buyUpgrade = function (upgradeName) {
     const upgrade = upgrades[upgradeName];
     const oldCost = getUpgradeCost(upgradeName);
     if (player.num >= oldCost) {

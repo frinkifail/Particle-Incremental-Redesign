@@ -36,9 +36,8 @@ if(player.num >= (player.speedCost * player.supScale)) {
 }*/
 
 export function scaleSpeed(upgradeName) {
-    const upgrade = upgrades[upgradeName];
     if(getUpgradeTimesBought(upgradeName) % 10 == 0) {
-        upgrade.multipler *= 1 //placeholder
+        setUpgradeCost(upgradeName, (getUpgradeTimesBought(upgradeName) * 5 + 50))
     }
 }
 

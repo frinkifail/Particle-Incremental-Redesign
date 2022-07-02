@@ -1,5 +1,5 @@
 import { load, getUpgradeTimesBought, getUpgradeCost, player } from './player'
-import { UpdateCostVal, upgrades } from './upgrades'
+import { UpdateCostVal, upgrades, buyUpgrade } from './upgrades'
 import { format } from './util'
 
 const themes = [

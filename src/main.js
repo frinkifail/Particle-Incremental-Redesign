@@ -23,7 +23,7 @@ function themeExec() {
     }
     document.getElementById("whattheme").textContent = "Theme: " + themeName;
 }
-export function theme() {
+window.theme = function () {
     player.themeNumber = (player.themeNumber + 1) % themes.length;
     themeExec();
 }

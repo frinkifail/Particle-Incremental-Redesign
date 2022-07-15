@@ -127,10 +127,6 @@ window.openTab = function (tab) {
 load()
 loadMisc()
 
-
-//debug
-console.log(getUpgradeTimesBought('gen'))
-
 window.setting1e4 = function () { player.eSetting = 1e+4; loadMisc() }
 window.setting1e6 = function () { player.eSetting = 1e+6; loadMisc() }
 

@@ -49,6 +49,9 @@ export function scaleGen(upgradeName) {
     else {
         setUpgradeCost(upgradeName, (getUpgradeCost(upgradeName) * upgrade.multiplier))
     }
+    
+//debug
+console.log(getUpgradeTimesBought('gen'))
 }
 
 window.buyUpgrade = function (upgradeName) {

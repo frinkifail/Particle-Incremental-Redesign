@@ -2,6 +2,9 @@ import { load, getUpgradeTimesBought, getUpgradeCost, player } from './player'
 import { UpdateCostVal, upgrades } from './upgrades'
 import { format } from './util'
 
+//debug
+console.log(getUpgradeTimesBought('gen'))
+
 const themes = [
     { textColor: "black", bgColor: "#EEEEEE", buttonColor: "#DFDFDF", borderColor: "#333333", themeName: "Light" },
     { textColor: "#EBEBEB", bgColor: "#696969", buttonColor: "#999999", borderColor: "black", themeName: "Dark" },
@@ -127,8 +130,8 @@ window.openTab = function (tab) {
 load()
 loadMisc()
 
-export function setting1e4() { player.eSetting = 1e+4; loadMisc() }
-export function setting1e6() { player.eSetting = 1e+6; loadMisc() }
+window.setting1e4 = function () { player.eSetting = 1e+4; loadMisc() }
+window.setting1e6 = function () { player.eSetting = 1e+6; loadMisc() }
 
 export function buyspeed() {
 if(player.num >= (player.speedCost * player.supScale)) {
@@ -357,7 +360,7 @@ function autosavetextanddelayupdate() {
     }
 }
 
-export function autosavesettings() {
+window.autosavesettings = function () {
     if(player.autoSaveMode == 5) {
         player.autoSaveMode = 0
     }

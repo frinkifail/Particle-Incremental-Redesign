@@ -581,7 +581,7 @@ function savinginloop() {
 	player.autoSaveDelay -= 1
     if(player.autoSaveDelay == 0) {
         player.autoSaveDelay = player.autoSaveSet
-        window.save()
+        save()
 	}
 }
 
@@ -600,6 +600,7 @@ const savefile = JSON.stringify(player)
 window.save = function () {
     localStorage.setItem('savefile', savefile)
 }
+const save = window.save
 
 window.reset = function () {
     localStorage.removeItem('savefile');

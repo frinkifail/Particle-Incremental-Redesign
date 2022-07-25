@@ -16,9 +16,6 @@ export function load() {
               },
             num: 0,
             speedCost: 50,
-            intervalSpeed: 1000,
-            fracMult: 2,
-            hundredOverIS: 0.1,
             gbUnlocked: false,
             gbTimeLeft: 0,
             gbTimeLeftCon: 10,
@@ -78,8 +75,6 @@ export function load() {
             gBoostSquare: 0,
             alphaMachineDoubleCost: 1000,
             alphaMachineMulti: 0,
-            supBought: 0,
-            supScale: 1
           };
     }
     else {

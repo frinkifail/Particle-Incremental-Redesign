@@ -106,7 +106,6 @@ function loadMisc() {
     }
     document.getElementById("gboostdouble").textContent = "Cost: " + format(player.gBoostDoubleCost) + " Alpha"
     document.getElementById("alphamachinedouble").textContent = "Cost: " + format(player.alphaMachineDoubleCost) + " Alpha"
-    document.getElementById("divspeedcost").textContent = "Cost: " + format(player.speedCost * player.supScale)
 }
 
 function makeElementMap(...names) {
@@ -130,20 +129,7 @@ loadMisc()
 window.setting1e4 = function () { player.eSetting = 1e+4; loadMisc() }
 window.setting1e6 = function () { player.eSetting = 1e+6; loadMisc() }
 
-export function buyspeed() {
-if(player.num >= (player.speedCost * player.supScale)) {
-    player.num -= (player.speedCost * player.supScale)
-    if(player.supBought % 10 == 0) {
-        player.supScale += 1
-    }
-    player.supBought++
-    player.intervalSpeed = 1000 / player.fracMult
-    player.fracMult++
-    document.getElementById("divspeedcost").textContent = "Cost: " + format(player.speedCost * player.supScale)
-}
-}
-
-export function mbman() {
+window.mbman = function () {
 player.num += (getUpgradeTimesBought('mbup') + 1) * (getUpgradeTimesBought('mbmult') + 1)
 document.getElementById("counter").textContent = format(player.num) + " particles"
 }
@@ -501,7 +487,7 @@ function fgbtest() {
         }
 
         const alphagaindisplay = player.alphaInc * player.alphaAccelerators * player.perBangMult * player.napOff * Math.pow(2, player.alphaMachineMulti)
-        const gain = (getUpgradeTimesBought('bb')+1) * getUpgradeTimesBought('gen') * player.hundredOverIS * (player.gbMult * player.npOff) * player.npOff * player.tbMultiplier * player.tempBoost * (1 + (((player.boosterParticles / 100) * player.bpPercent) / 100))
+        const gain = (getUpgradeTimesBought('bb')+1) * getUpgradeTimesBought('gen') * (getUpgradeTimesBought('speed')/10+0.1) * (player.gbMult * player.npOff) * player.npOff * player.tbMultiplier * player.tempBoost * (1 + (((player.boosterParticles / 100) * player.bpPercent) / 100))
 
         document.getElementById("alphapb").textContent = "You are getting " + format(alphagaindisplay) + " Alpha/bang"
         player.bangTimeLeft -= 1
@@ -512,8 +498,6 @@ function fgbtest() {
             player.gbTimeLeft -= 1
         }
         document.getElementById("divgbtl").textContent = "Boost Time Left: " + format(player.gbTimeLeft)
-
-        player.hundredOverIS = 100 / player.intervalSpeed
         
         player.untilBoost -= 1
         if(player.untilBoost == 0) {

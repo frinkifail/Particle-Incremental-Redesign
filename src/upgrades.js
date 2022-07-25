@@ -14,7 +14,7 @@ export function UpdateCostVal(elementID, variable, currency = "Base") {
 export const upgrades = {
     'gen': { multiplier: 4, scaleFunction: scaleGen, costDiv: "divgencost", currency: "Base"},
     'bb': {  multiplier: 2, scaleFunction: scaleMultiplier, costDiv: "divbbcost", currency: "Base"},
-    'speed': {  multiplier: 1.5, scaleFunction: scaleSpeed, costDiv: "divspeedcost", currency: "Base"},
+    'speed': {  multiplier: NaN, scaleFunction: scaleSpeed, costDiv: "divspeedcost", currency: "Base"},
     'mbup': {  multiplier: 2, scaleFunction: scaleMultiplier, costDiv: "divmbupcost", currency: "Base"},
     'mbmult': {  multiplier: 3, scaleFunction: scaleMultiplier, costDiv: "divmbmultcost", currency: "Base"},
 }
@@ -39,7 +39,7 @@ if(player.num >= (player.speedCost * player.supScale)) {
 
 export function scaleSpeed(upgradeName) {
     if(getUpgradeTimesBought(upgradeName) % 10 == 0) {
-        setUpgradeCost(upgradeName, (getUpgradeTimesBought(upgradeName) * 5 + 50))
+        setUpgradeCost(upgradeName, (getUpgradeTimesBought(upgradeName) * 5 + 100))
     }
 }
 
@@ -51,9 +51,6 @@ export function scaleGen(upgradeName) {
     else {
         setUpgradeCost(upgradeName, (getUpgradeCost(upgradeName) * upgrade.multiplier))
     }
-    
-//debug
-console.log(getUpgradeTimesBought('gen'))
 }
 
 window.buyUpgrade = function (upgradeName) {

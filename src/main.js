@@ -130,8 +130,8 @@ window.setting1e4 = function () { player.eSetting = 1e+4; loadMisc() }
 window.setting1e6 = function () { player.eSetting = 1e+6; loadMisc() }
 
 window.mbman = function () {
-player.num += (getUpgradeTimesBought('mbup') + 1) * (getUpgradeTimesBought('mbmult') + 1)
-document.getElementById("counter").textContent = format(player.num) + " particles"
+    player.num += (getUpgradeTimesBought('mbup') + 1) * (getUpgradeTimesBought('mbmult') + 1)
+    document.getElementById("counter").textContent = format(player.num) + " particles"
 }
 
 export function unlockgeneratorboost() {

@@ -17,25 +17,27 @@ export const upgrades = {
     'speed': {  multiplier: NaN, scaleFunction: scaleSpeed, costDiv: "divspeedcost", currency: "Base"},
     'mbup': {  multiplier: 2, scaleFunction: scaleMultiplier, costDiv: "divmbupcost", currency: "Base"},
     'mbmult': {  multiplier: 3, scaleFunction: scaleMultiplier, costDiv: "divmbmultcost", currency: "Base"},
+    'unlockgb': {  multiplier: Infinity, scaleFunction: scaleMultiplier, costDiv: "divgenunlockcost", currency: "Base"},
+    'gbupt': {  multiplier: 5, scaleFunction: GBExtraExecT, costDiv: "divgbuptcost", currency: "Base"},
+    'gbupm': {  multiplier: 5, scaleFunction: GBExtraExecM, costDiv: "divgbupmcost", currency: "Base"},
 }
 
 export function scaleMultiplier(upgradeName) {
     const upgrade = upgrades[upgradeName];
     setUpgradeCost(upgradeName, (getUpgradeCost(upgradeName) * upgrade.multiplier))
 }
-
-/*function buyspeed() {
-if(player.num >= (player.speedCost * player.supScale)) {
-    player.num -= (player.speedCost * player.supScale)
-    if(player.supBought % 10 == 0) {
-        player.supScale += 1
-    }
-    player.supBought++
-    player.intervalSpeed = 1000 / player.fracMult
-    player.fracMult++
-    document.getElementById("divspeedcost").textContent = "Cost: " + format(player.speedCost * player.supScale)
+export function GBExtraExecT(upgradeName) {
+    scaleMultiplier(upgradeName)
+    player.gbTimeLeftCon += 20 * Math.pow(2, player.gBoostSquare)
+    player.gbTimeLeft = 0
+    player.gbTimeLeft = player.gbTimeLeftCon
 }
-}*/
+export function GBExtraExecM(upgradeName) {
+    scaleMultiplier(upgradeName)
+    player.gbMultCon += 5
+    player.gbTimeLeft = 0
+    player.gbTimeLeft = player.gbTimeLeftCon
+}
 
 export function scaleSpeed(upgradeName) {
     if(getUpgradeTimesBought(upgradeName) % 10 == 0) {

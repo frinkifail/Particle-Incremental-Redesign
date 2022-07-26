@@ -61,13 +61,12 @@ function loadMisc() {
     else {
         UpdateCostVal("divgencost", getUpgradeCost('gen'))
     }
-    if(player.gbUnlocked) {
-        document.getElementById("divgenunlockcost").textContent = "Unlocked"
+    if(getUpgradeTimesBought('unlockgb') == 1) {
         document.getElementById("gbshow").style.display='block'
+        document.getElementById("divgenunlockcost").style.display='none'
+        document.getElementById("gbunlockbutton").style.display='none'
     }
-    UpdateCostVal("divgbuptcost", player.gbUptCost)
     UpdateCostVal("divalphaacceleratorcost", player.alphaAccCost)
-    UpdateCostVal("divgbupmcost", player.gbUpmCost)
     document.getElementById("chunkamount").textContent = "Particle Chunks: " + format(player.pChunks)
     UpdateCostVal("divthreeboostcost", player.tbCost, "Alpha")
     UpdateCostVal("divperbangcost", player.pbCost, "Alpha")
@@ -134,60 +133,10 @@ window.mbman = function () {
     document.getElementById("counter").textContent = format(player.num) + " particles"
 }
 
-export function unlockgeneratorboost() {
-if(player.gbUnlocked) {
-    document.getElementById("divgenunlockcost").textContent = "Unlocked"
-}
-else {
-    if(player.num >= 5000) {
-        player.num -= 5000
-        player.gbUnlocked = true
-        document.getElementById("divgenunlockcost").textContent = "Unlocked"
-        document.getElementById("gbshow").style.display='block'
-    }
-}
-}
-
-function gbboost() {
-if(player.gbUnlocked) {
+window.gbboost = function () {
     player.gbTimeLeft = player.gbTimeLeftCon
-    document.getElementById("divgenboost").textContent = ""
 }
-else {
-    document.getElementById("divgenboost").textContent = "Unlock Generator Boost first"
-}
-}
-export function gbupt() {
-if(player.gbUnlocked) {
-    if(player.num >= player.gbUptCost) {
-        player.num -= player.gbUptCost
-        player.gbUptCost *= 5
-        document.getElementById("divgbuptcost").textContent = "Cost: " + format(player.gbUptCost)
-        player.gbTimeLeftCon += 20 * Math.pow(2, player.gBoostSquare)
-        player.gbTimeLeft = 0
-        gbboost()
-    }
-}
-else {
-    document.getElementById("divgbuptcost").textContent = "Unlock Generator Boost first"
-}
-}
-
-export function gbupm() {
-if(player.gbUnlocked) {
-    if(player.num >= player.gbUpmCost) {
-        player.num -= player.gbUpmCost
-        player.gbUpmCost *= 5
-        document.getElementById("divgbupmcost").textContent = "Cost: " + format(player.gbUpmCost)
-        player.gbMultCon += 5
-        player.gbTimeLeft = 0
-        gbboost()
-    }
-}
-else {
-    document.getElementById("divgbupmcost").textContent = "Unlock Generator Boost first"
-}
-}
+const gbboost = window.gbboost
 
 export function nuclearbuy() {
     if(player.num >= player.nuclearCost) {
@@ -474,10 +423,15 @@ function fgbtest() {
         document.getElementById("bigboosttext").style.display='block'
         document.getElementById("veryouterboost").style.display='block'
         if(player.gbTimeLeft > 0) {
-            player.gbMult = player.gbMultCon
+            player.gbMult = (getUpgradeTimesBought('gbupm')*5+5)
         }
         else {
             player.gbMult = 1
+        }
+        if(getUpgradeTimesBought('unlockgb') == 1) {
+            document.getElementById("gbshow").style.display='block'
+            document.getElementById("divgenunlockcost").style.display='none'
+            document.getElementById("gbunlockbutton").style.display='none'
         }
         
         if(player.bangTimeLeft == 0) {
@@ -487,7 +441,7 @@ function fgbtest() {
         }
 
         const alphagaindisplay = player.alphaInc * player.alphaAccelerators * player.perBangMult * player.napOff * Math.pow(2, player.alphaMachineMulti)
-        const gain = (getUpgradeTimesBought('bb')+1) * getUpgradeTimesBought('gen') * (getUpgradeTimesBought('speed')/10+0.1) * (player.gbMult * player.npOff) * player.npOff * player.tbMultiplier * player.tempBoost * (1 + (((player.boosterParticles / 100) * player.bpPercent) / 100))
+        const gain = (getUpgradeTimesBought('bb')+1) * getUpgradeTimesBought('gen') * (getUpgradeTimesBought('speed')/10+0.1) * player.gbMult * player.npOff * player.npOff * player.tbMultiplier * player.tempBoost * (1 + (((player.boosterParticles / 100) * player.bpPercent) / 100))
 
         document.getElementById("alphapb").textContent = "You are getting " + format(alphagaindisplay) + " Alpha/bang"
         player.bangTimeLeft -= 1

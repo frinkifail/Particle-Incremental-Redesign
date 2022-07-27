@@ -21,6 +21,7 @@ export const upgrades = {
     'gbupt': {  multiplier: 5, scaleFunction: GBTExtra, costDiv: "divgbuptcost", currency: "Base"},
     'gbupm': {  multiplier: 5, scaleFunction: GBMExtra, costDiv: "divgbupmcost", currency: "Base"},
     'nuclearbuy': {  multiplier: 7, scaleFunction: NBExtra, costDiv: "divnuclearcost", currency: "Base"},
+    'alphaacc': {  multiplier: 1000, scaleFunction: AAExtra, costDiv: "divalphaacceleratorcost", currency: "Base"},
 }
 
 export function scaleMultiplier(upgradeName) {
@@ -44,6 +45,19 @@ export function GBMExtra(upgradeName) {
 export function NBExtra(upgradeName) {
     scaleMultiplier(upgradeName)
     document.getElementById("divnp").textContent = "Nuclear Particles: " + getUpgradeTimesBought('nuclearbuy')
+}
+
+export function AAExtra(upgradeName) {
+    scaleMultiplier(upgradeName)
+    if(player.bangTimeLeft > 0 && player.bangTimeLeft < player.bangTime) {
+        document.getElementById("divalphaacceleratorcost").style.display='none'
+        document.getElementById("aabutton").style.display='none'
+    }
+    else {
+        document.getElementById("divalphaacceleratorcost").style.display='block'
+        document.getElementById("aabutton").style.display='block'
+        player.alphaAcceleratorsLeft = getUpgradeTimesBought('alphaacc')
+    }
 }
 
 export function scaleSpeed(upgradeName) {

@@ -138,40 +138,27 @@ window.gbboost = function () {
 }
 const gbboost = window.gbboost
 
-export function alphaacc() {
-if(player.bangTimeLeft > 0 && player.bangTimeLeft < player.bangTime) {
-    document.getElementById("divalphaacceleratorcost").textContent = "Bang in progress, try again later"
-}
-else {
-    if(player.num >= player.alphaAccCost) {
-        player.num -= player.alphaAccCost
-        player.alphaAccCost *= 1000
-        document.getElementById("divalphaacceleratorcost").textContent = "Cost: " + format(player.alphaAccCost)
-        player.alphaAccelerators += 1
-        player.alphaAcceleratorsLeft = player.alphaAccelerators
-    }
-}
-}
-
-function makechunk() {
-if(player.num >= 1e+9) {
-    player.num -= 1e+9
-    player.pChunks += 1
-    document.getElementById("chunkamount").textContent = "Particle Chunks: " + format(player.pChunks)
-}
-}
-
-function bang() {
-if(player.pChunks >= 2) {
-    if(player.alphaAcceleratorsLeft > 0) {
-        player.alphaAcceleratorsLeft -= player.alphaAccelerators
-        player.pChunks -=2
-        player.bangTimeLeft = player.bangTime
+window.makechunk = function () {
+    if(player.num >= 1e+9) {
+        player.num -= 1e+9
+        player.pChunks += 1
         document.getElementById("chunkamount").textContent = "Particle Chunks: " + format(player.pChunks)
-        document.getElementById("boostersmaintext").style.display='block'
     }
 }
+const makechunk = window.makechunk
+
+window.bang = function () {
+    if(player.pChunks >= 2) {
+        if(getUpgradeTimesBought('alphaacc') > 0) {
+            player.alphaAcceleratorsLeft -= getUpgradeTimesBought('alphaacc')
+            player.pChunks -=2
+            player.bangTimeLeft = player.bangTime
+            document.getElementById("chunkamount").textContent = "Particle Chunks: " + format(player.pChunks)
+            document.getElementById("boostersmaintext").style.display='block'
+        }
+    }
 }
+const bang = window.bang
 
 export function threeboost() {
     if(player.alphaNum >= player.tbCost) {
@@ -425,12 +412,12 @@ function fgbtest() {
         }
         
         if(player.bangTimeLeft == 0) {
-            player.alphaAcceleratorsLeft += player.alphaAccelerators
+            player.alphaAcceleratorsLeft += getUpgradeTimesBought('alphaacc')
             player.alphaNum += player.alphaInc * player.alphaAcceleratorsLeft * player.perBangMult * player.napOff * Math.pow(2, player.alphaMachineMulti)
             document.getElementById("bangtimeleft").textContent = ""
         }
 
-        const alphagaindisplay = player.alphaInc * player.alphaAccelerators * player.perBangMult * player.napOff * Math.pow(2, player.alphaMachineMulti)
+        const alphagaindisplay = player.alphaInc * getUpgradeTimesBought('alphaacc') * player.perBangMult * player.napOff * Math.pow(2, player.alphaMachineMulti)
         const gain = (getUpgradeTimesBought('bb')+1) * getUpgradeTimesBought('gen') * (getUpgradeTimesBought('speed')/10+0.1) * player.gbMult * (getUpgradeTimesBought('nuclearbuy')+1) * (getUpgradeTimesBought('nuclearbuy')+1) * player.tbMultiplier * player.tempBoost * (1 + (((player.boosterParticles / 100) * player.bpPercent) / 100))
 
         document.getElementById("alphapb").textContent = "You are getting " + format(alphagaindisplay) + " Alpha/bang"

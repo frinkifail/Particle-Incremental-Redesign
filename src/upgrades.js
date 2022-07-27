@@ -49,13 +49,7 @@ export function NBExtra(upgradeName) {
 
 export function AAExtra(upgradeName) {
     scaleMultiplier(upgradeName)
-    if(player.bangTimeLeft > 0 && player.bangTimeLeft < player.bangTime) {
-        document.getElementById("divalphaacceleratorcost").style.display='none'
-        document.getElementById("aabutton").style.display='none'
-    }
-    else {
-        document.getElementById("divalphaacceleratorcost").style.display='block'
-        document.getElementById("aabutton").style.display='block'
+    if(!(player.bangTimeLeft > 0 && player.bangTimeLeft < player.bangTime)) {
         player.alphaAcceleratorsLeft = getUpgradeTimesBought('alphaacc')
     }
 }

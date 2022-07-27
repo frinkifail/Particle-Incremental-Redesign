@@ -424,6 +424,12 @@ function fgbtest() {
         player.bangTimeLeft -= 1
         if(player.bangTimeLeft > 0 && player.bangTimeLeft < player.bangTime) {
             document.getElementById("bangtimeleft").textContent = "Bang time left: " + player.bangTimeLeft
+            document.getElementById("divalphaacceleratorcost").style.display='none'
+            document.getElementById("aabutton").style.display='none'
+        }
+        else {
+            document.getElementById("divalphaacceleratorcost").style.display='inline-block'
+            document.getElementById("aabutton").style.display='inline-block'
         }
         if(player.gbTimeLeft > 0) {
             player.gbTimeLeft -= 1

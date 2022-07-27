@@ -20,12 +20,14 @@ export const upgrades = {
     'unlockgb': {  multiplier: Infinity, scaleFunction: scaleMultiplier, costDiv: "divgenunlockcost", currency: "Base"},
     'gbupt': {  multiplier: 5, scaleFunction: GBExtraExecT, costDiv: "divgbuptcost", currency: "Base"},
     'gbupm': {  multiplier: 5, scaleFunction: GBExtraExecM, costDiv: "divgbupmcost", currency: "Base"},
+    'nuclearbuy': {  multiplier: 7, scaleFunction: NBExtra, costDiv: "divnuclearcost", currency: "Base"},
 }
 
 export function scaleMultiplier(upgradeName) {
     const upgrade = upgrades[upgradeName];
     setUpgradeCost(upgradeName, (getUpgradeCost(upgradeName) * upgrade.multiplier))
 }
+
 export function GBExtraExecT(upgradeName) {
     scaleMultiplier(upgradeName)
     player.gbTimeLeftCon += 20 * Math.pow(2, player.gBoostSquare)
@@ -37,6 +39,11 @@ export function GBExtraExecM(upgradeName) {
     player.gbMultCon += 5
     player.gbTimeLeft = 0
     player.gbTimeLeft = player.gbTimeLeftCon
+}
+
+export function NBExtra(upgradeName) {
+    scaleMultiplier(upgradeName)
+    document.getElementById("divnp").textContent = "Nuclear Particles: " + getUpgradeTimesBought('nuclearbuy')
 }
 
 export function scaleSpeed(upgradeName) {

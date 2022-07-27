@@ -7,7 +7,7 @@ export function UpdateCostVal(elementID, variable, currency = "Base") {
     document.getElementById(elementID).textContent = "Cost: " + format(variable)
     }
     else{
-        document.getElementById(elementID).textContent = "Cost: " + format(variable) + currency
+        document.getElementById(elementID).textContent = "Cost: " + format(variable) + " " + currency
     }
 }
 
@@ -22,6 +22,7 @@ export const upgrades = {
     'gbupm': {  multiplier: 5, scaleFunction: GBMExtra, costDiv: "divgbupmcost", currency: "Base"},
     'nuclearbuy': {  multiplier: 7, scaleFunction: NBExtra, costDiv: "divnuclearcost", currency: "Base"},
     'alphaacc': {  multiplier: 1000, scaleFunction: AAExtra, costDiv: "divalphaacceleratorcost", currency: "Base"},
+    'tb': {  multiplier: 4, scaleFunction: scaleMultiplier, costDiv: "divthreeboostcost", currency: "Alpha"},
 }
 
 export function scaleMultiplier(upgradeName) {
@@ -70,12 +71,22 @@ export function scaleGen(upgradeName) {
     }
 }
 
+function currencyConverter(curr) {
+    switch(curr) {
+        case "Base":
+            return 'num'
+        case "Alpha":
+            return 'alphaNum'
+    }
+}
+
 window.buyUpgrade = function (upgradeName) {
     const upgrade = upgrades[upgradeName];
     const oldCost = getUpgradeCost(upgradeName);
-    if (player.num >= oldCost) {
+    const cCurr = currencyConverter(upgrade.currency)
+    if (player[cCurr] >= oldCost) {
         player.upgrades[upgradeName].timesBought++;
-        player.num -= oldCost;
+        player[cCurr] -= oldCost;
         upgrade.scaleFunction(upgradeName);
         UpdateCostVal(upgrade.costDiv, getUpgradeCost(upgradeName), upgrade.currency);
     }   

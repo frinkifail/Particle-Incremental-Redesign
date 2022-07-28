@@ -67,7 +67,7 @@ export function scaleGen(upgradeName) {
         setUpgradeCost(upgradeName, 1000)
     }
     else {
-        scaleMultiplier(4)
+        scaleMultiplier(4) //please sned help AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
     }
 }
 

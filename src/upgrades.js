@@ -11,13 +11,13 @@ export function UpdateCostVal(elementID, variable, currency = "num") {
 }
 
 export const upgrades = {
-    'gen': { multiplier: 4, scaleFunction: scaleGen(), costDiv: "divgencost", currency: "num"},
+    'gen': { multiplier: 4, scaleFunction: scaleGen, costDiv: "divgencost", currency: "num"},
     'bb': {  scaleFunction: scaleMultiplier(2), costDiv: "divbbcost", currency: "num"},
     'speed': {  scaleFunction: scaleSpeed, costDiv: "divspeedcost", currency: "num"},
     'mbup': { scaleFunction: scaleMultiplier(2), costDiv: "divmbupcost", currency: "num"},
     'mbmult': {  scaleFunction: scaleMultiplier(3), costDiv: "divmbmultcost", currency: "num"},
     'unlockgb': {  scaleFunction: scaleMultiplier(Infinity), costDiv: "divgenunlockcost", currency: "num"},
-    'gbupt': {  scaleFunction: GBTExtra(5), costDiv: "divgbuptcost", currency: "num"},
+    'gbupt': {  scaleFunction: GBTExtra(scaleMultiplier(5)), costDiv: "divgbuptcost", currency: "num"},
     'gbupm': {  scaleFunction: GBMExtra(5), costDiv: "divgbupmcost", currency: "num"},
     'nuclearbuy': {  scaleFunction: NBExtra(7), costDiv: "divnuclearcost", currency: "num"},
     'alphaacc': {  scaleFunction: AAExtra(1000), costDiv: "divalphaacceleratorcost", currency: "num"},
@@ -31,30 +31,39 @@ export function scaleMultiplier(multiplier) {
     }
 }
 
-export function GBTExtra(multiplier) {
-    scaleMultiplier(multiplier)
-    player.gbTimeLeftCon += 20 * Math.pow(2, player.gBoostSquare)
-    player.gbTimeLeft = 0
-    player.gbTimeLeft = player.gbTimeLeftCon
-}
-export function GBMExtra(multiplier) {
-    scaleMultiplier(multiplier)
-    player.gbMultCon += 5
-    player.gbTimeLeft = 0
-    player.gbTimeLeft = player.gbTimeLeftCon
-}
-
-export function NBExtra(multiplier) {
-    scaleMultiplier(multiplier)
-    document.getElementById("divnp").textContent = "Nuclear Particles: " + getUpgradeTimesBought('nuclearbuy')
-}
-
-export function AAExtra(multiplier) {
-    scaleMultiplier(multiplier)
-    if(!(player.bangTimeLeft > 0 && player.bangTimeLeft < player.bangTime)) {
-        player.alphaAcceleratorsLeft = getUpgradeTimesBought('alphaacc')
+export function GBTExtra(scaler) {
+    return function (upgradeName) {
+       scaler(upgradeName)
+       player.gbTimeLeftCon += 20 * Math.pow(2, player.gBoostSquare)
+       player.gbTimeLeft = 0
+       player.gbTimeLeft = player.gbTimeLeftCon
+    }
+ }
+export function GBMExtra(scaler) {
+    return function (upgradeName) {
+        scaler(upgradeName)
+        player.gbMultCon += 5
+        player.gbTimeLeft = 0
+        player.gbTimeLeft = player.gbTimeLeftCon
     }
 }
+
+export function NBExtra(scaler) {
+    return function (upgradeName) {
+        scaler(upgradeName)
+        document.getElementById("divnp").textContent = "Nuclear Particles: " + getUpgradeTimesBought('nuclearbuy')
+    }
+}
+
+export function AAExtra(scaler) {
+    return function (upgradeName) {
+        scaler(upgradeName)
+        if(!(player.bangTimeLeft > 0 && player.bangTimeLeft < player.bangTime)) {
+            player.alphaAcceleratorsLeft = getUpgradeTimesBought('alphaacc')
+        }
+    }
+}
+
 
 export function scaleSpeed(upgradeName) {
     if(getUpgradeTimesBought(upgradeName) % 10 == 0) {
@@ -67,7 +76,7 @@ export function scaleGen(upgradeName) {
         setUpgradeCost(upgradeName, 1000)
     }
     else {
-        scaleMultiplier(4) //please sned help AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
+        scaleMultiplier(4)(upgradeName) //please sned help AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
     }
 }
 

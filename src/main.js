@@ -70,7 +70,6 @@ function loadMisc() {
     document.getElementById("chunkamount").textContent = "Particle Chunks: " + format(player.pChunks)
     //^ post-reformat
     //(down) pre-format
-    UpdateCostVal("divperbangcost", player.pbCost, "Alpha")
     document.getElementById("divbangspeedcost").textContent = "Cost: " + format(player.bangSpeedCost) + " Alpha"
     document.getElementById("divupgradepcacost").textContent = "Cost: " + format(player.pcaUpCost) + " Alpha"
     if(player.pcaUnlocked) {

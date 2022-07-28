@@ -11,44 +11,46 @@ export function UpdateCostVal(elementID, variable, currency = "num") {
 }
 
 export const upgrades = {
-    'gen': { multiplier: 4, scaleFunction: scaleGen, costDiv: "divgencost", currency: "num"},
-    'bb': {  multiplier: 2, scaleFunction: scaleMultiplier, costDiv: "divbbcost", currency: "num"},
-    'speed': {  multiplier: NaN, scaleFunction: scaleSpeed, costDiv: "divspeedcost", currency: "num"},
-    'mbup': {  multiplier: 2, scaleFunction: scaleMultiplier, costDiv: "divmbupcost", currency: "num"},
-    'mbmult': {  multiplier: 3, scaleFunction: scaleMultiplier, costDiv: "divmbmultcost", currency: "num"},
-    'unlockgb': {  multiplier: Infinity, scaleFunction: scaleMultiplier, costDiv: "divgenunlockcost", currency: "num"},
-    'gbupt': {  multiplier: 5, scaleFunction: GBTExtra, costDiv: "divgbuptcost", currency: "num"},
-    'gbupm': {  multiplier: 5, scaleFunction: GBMExtra, costDiv: "divgbupmcost", currency: "num"},
-    'nuclearbuy': {  multiplier: 7, scaleFunction: NBExtra, costDiv: "divnuclearcost", currency: "num"},
-    'alphaacc': {  multiplier: 1000, scaleFunction: AAExtra, costDiv: "divalphaacceleratorcost", currency: "num"},
-    'tb': {  multiplier: 4, scaleFunction: scaleMultiplier, costDiv: "divthreeboostcost", currency: "alphaNum"},
+    'gen': { multiplier: 4, scaleFunction: scaleGen(), costDiv: "divgencost", currency: "num"},
+    'bb': {  scaleFunction: scaleMultiplier(2), costDiv: "divbbcost", currency: "num"},
+    'speed': {  scaleFunction: scaleSpeed, costDiv: "divspeedcost", currency: "num"},
+    'mbup': { scaleFunction: scaleMultiplier(2), costDiv: "divmbupcost", currency: "num"},
+    'mbmult': {  scaleFunction: scaleMultiplier(3), costDiv: "divmbmultcost", currency: "num"},
+    'unlockgb': {  scaleFunction: scaleMultiplier(Infinity), costDiv: "divgenunlockcost", currency: "num"},
+    'gbupt': {  scaleFunction: GBTExtra(5), costDiv: "divgbuptcost", currency: "num"},
+    'gbupm': {  scaleFunction: GBMExtra(5), costDiv: "divgbupmcost", currency: "num"},
+    'nuclearbuy': {  scaleFunction: NBExtra(7), costDiv: "divnuclearcost", currency: "num"},
+    'alphaacc': {  scaleFunction: AAExtra(1000), costDiv: "divalphaacceleratorcost", currency: "num"},
+    'tb': {  scaleFunction: scaleMultiplier(4), costDiv: "divthreeboostcost", currency: "alphaNum"},
+    'perbang': {  scaleFunction: scaleMultiplier(4), costDiv: "divperbangcost", currency: "alphaNum"},
 }
 
-export function scaleMultiplier(upgradeName) {
-    const upgrade = upgrades[upgradeName];
-    setUpgradeCost(upgradeName, (getUpgradeCost(upgradeName) * upgrade.multiplier))
+export function scaleMultiplier(multiplier) {
+    return function (upgradeName) {
+        setUpgradeCost( upgradeName, getUpgradeCost(upgradeName) * multiplier);
+    }
 }
 
-export function GBTExtra(upgradeName) {
-    scaleMultiplier(upgradeName)
+export function GBTExtra(multiplier) {
+    scaleMultiplier(multiplier)
     player.gbTimeLeftCon += 20 * Math.pow(2, player.gBoostSquare)
     player.gbTimeLeft = 0
     player.gbTimeLeft = player.gbTimeLeftCon
 }
-export function GBMExtra(upgradeName) {
-    scaleMultiplier(upgradeName)
+export function GBMExtra(multiplier) {
+    scaleMultiplier(multiplier)
     player.gbMultCon += 5
     player.gbTimeLeft = 0
     player.gbTimeLeft = player.gbTimeLeftCon
 }
 
-export function NBExtra(upgradeName) {
-    scaleMultiplier(upgradeName)
+export function NBExtra(multiplier) {
+    scaleMultiplier(multiplier)
     document.getElementById("divnp").textContent = "Nuclear Particles: " + getUpgradeTimesBought('nuclearbuy')
 }
 
-export function AAExtra(upgradeName) {
-    scaleMultiplier(upgradeName)
+export function AAExtra(multiplier) {
+    scaleMultiplier(multiplier)
     if(!(player.bangTimeLeft > 0 && player.bangTimeLeft < player.bangTime)) {
         player.alphaAcceleratorsLeft = getUpgradeTimesBought('alphaacc')
     }
@@ -61,12 +63,11 @@ export function scaleSpeed(upgradeName) {
 }
 
 export function scaleGen(upgradeName) {
-    const upgrade = upgrades[upgradeName];
     if(getUpgradeCost(upgradeName) == 0) {
         setUpgradeCost(upgradeName, 1000)
     }
     else {
-        setUpgradeCost(upgradeName, (getUpgradeCost(upgradeName) * upgrade.multiplier))
+        scaleMultiplier(4)
     }
 }
 

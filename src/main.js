@@ -159,15 +159,6 @@ window.bang = function () {
 }
 const bang = window.bang
 
-export function threeboost() {
-    if(player.alphaNum >= player.tbCost) {
-        player.alphaNum -= player.tbCost
-        player.tbCost *= 4
-        document.getElementById("divthreeboostcost").textContent = "Cost: " + format(player.tbCost) + " Alpha"
-        player.tbMultiplier *= 3
-    }
-}
-
 export function perbang() {
     if(player.alphaNum >= player.pbCost) {
         player.alphaNum -= player.pbCost
@@ -412,11 +403,11 @@ function fgbtest() {
         
         if(player.bangTimeLeft == 0) {
             player.alphaAcceleratorsLeft += getUpgradeTimesBought('alphaacc')
-            player.alphaNum += player.alphaInc * player.alphaAcceleratorsLeft * player.perBangMult * player.napOff * Math.pow(2, player.alphaMachineMulti)
+            player.alphaNum += player.alphaInc * player.alphaAcceleratorsLeft * (getUpgradeTimesBought('perbang')+1) * player.napOff * Math.pow(2, player.alphaMachineMulti)
             document.getElementById("bangtimeleft").textContent = ""
         }
 
-        const alphagaindisplay = player.alphaInc * getUpgradeTimesBought('alphaacc') * player.perBangMult * player.napOff * Math.pow(2, player.alphaMachineMulti)
+        const alphagaindisplay = player.alphaInc * getUpgradeTimesBought('alphaacc') * (getUpgradeTimesBought('perbang')+1) * player.napOff * Math.pow(2, player.alphaMachineMulti)
         const gain = (getUpgradeTimesBought('bb')+1) * getUpgradeTimesBought('gen') * (getUpgradeTimesBought('speed')/10+0.1) * player.gbMult * (getUpgradeTimesBought('nuclearbuy')+1) * (getUpgradeTimesBought('nuclearbuy')+1) * Math.pow(3, getUpgradeTimesBought('tb')) * player.tempBoost * (1 + (((player.boosterParticles / 100) * player.bpPercent) / 100))
 
         document.getElementById("alphapb").textContent = "You are getting " + format(alphagaindisplay) + " Alpha/bang"

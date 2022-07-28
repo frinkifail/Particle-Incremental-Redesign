@@ -2,30 +2,26 @@ import { format } from './util'
 import { player, getUpgradeTimesBought, getUpgradeCost, setUpgradeCost } from './player'
 
 
-export function UpdateCostVal(elementID, variable, currency = "player.num") {
-    if(currency == "player.num") {
-    document.getElementById(elementID).textContent = "Cost: " + format(variable)
+export function UpdateCostVal(elementID, variable, currency = "num") {
+    const currencyName = {
+        'num': '',
+        'alphaNum': ' Alpha',
     }
-    else{
-        const currencyName = {
-            'player.alphaNum': ' Alpha',
-        }
-        document.getElementById(elementID).textContent = "Cost: " + format(variable) + currencyName[currency]
-    }
+    document.getElementById(elementID).textContent = "Cost: " + format(variable) + currencyName[currency]
 }
 
 export const upgrades = {
-    'gen': { multiplier: 4, scaleFunction: scaleGen, costDiv: "divgencost", currency: "player.num"},
-    'bb': {  multiplier: 2, scaleFunction: scaleMultiplier, costDiv: "divbbcost", currency: "player.num"},
-    'speed': {  multiplier: NaN, scaleFunction: scaleSpeed, costDiv: "divspeedcost", currency: "player.num"},
-    'mbup': {  multiplier: 2, scaleFunction: scaleMultiplier, costDiv: "divmbupcost", currency: "player.num"},
-    'mbmult': {  multiplier: 3, scaleFunction: scaleMultiplier, costDiv: "divmbmultcost", currency: "player.num"},
-    'unlockgb': {  multiplier: Infinity, scaleFunction: scaleMultiplier, costDiv: "divgenunlockcost", currency: "player.num"},
-    'gbupt': {  multiplier: 5, scaleFunction: GBTExtra, costDiv: "divgbuptcost", currency: "player.num"},
-    'gbupm': {  multiplier: 5, scaleFunction: GBMExtra, costDiv: "divgbupmcost", currency: "player.num"},
-    'nuclearbuy': {  multiplier: 7, scaleFunction: NBExtra, costDiv: "divnuclearcost", currency: "player.num"},
-    'alphaacc': {  multiplier: 1000, scaleFunction: AAExtra, costDiv: "divalphaacceleratorcost", currency: "player.num"},
-    'tb': {  multiplier: 4, scaleFunction: scaleMultiplier, costDiv: "divthreeboostcost", currency: "player.alphaNum"},
+    'gen': { multiplier: 4, scaleFunction: scaleGen, costDiv: "divgencost", currency: "num"},
+    'bb': {  multiplier: 2, scaleFunction: scaleMultiplier, costDiv: "divbbcost", currency: "num"},
+    'speed': {  multiplier: NaN, scaleFunction: scaleSpeed, costDiv: "divspeedcost", currency: "num"},
+    'mbup': {  multiplier: 2, scaleFunction: scaleMultiplier, costDiv: "divmbupcost", currency: "num"},
+    'mbmult': {  multiplier: 3, scaleFunction: scaleMultiplier, costDiv: "divmbmultcost", currency: "num"},
+    'unlockgb': {  multiplier: Infinity, scaleFunction: scaleMultiplier, costDiv: "divgenunlockcost", currency: "num"},
+    'gbupt': {  multiplier: 5, scaleFunction: GBTExtra, costDiv: "divgbuptcost", currency: "num"},
+    'gbupm': {  multiplier: 5, scaleFunction: GBMExtra, costDiv: "divgbupmcost", currency: "num"},
+    'nuclearbuy': {  multiplier: 7, scaleFunction: NBExtra, costDiv: "divnuclearcost", currency: "num"},
+    'alphaacc': {  multiplier: 1000, scaleFunction: AAExtra, costDiv: "divalphaacceleratorcost", currency: "num"},
+    'tb': {  multiplier: 4, scaleFunction: scaleMultiplier, costDiv: "divthreeboostcost", currency: "alphaNum"},
 }
 
 export function scaleMultiplier(upgradeName) {

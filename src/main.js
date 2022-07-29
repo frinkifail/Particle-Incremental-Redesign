@@ -70,7 +70,6 @@ function loadMisc() {
     document.getElementById("chunkamount").textContent = "Particle Chunks: " + format(player.pChunks)
     //^ post-reformat
     //(down) pre-format
-    document.getElementById("divbangspeedcost").textContent = "Cost: " + format(player.bangSpeedCost) + " Alpha"
     document.getElementById("divupgradepcacost").textContent = "Cost: " + format(player.pcaUpCost) + " Alpha"
     if(player.pcaUnlocked) {
         document.getElementById("divunlockpca").textContent = "Unlocked"
@@ -157,32 +156,6 @@ window.bang = function () {
     }
 }
 const bang = window.bang
-
-export function perbang() {
-    if(player.alphaNum >= player.pbCost) {
-        player.alphaNum -= player.pbCost
-        player.pbCost *= 4
-        document.getElementById("divperbangcost").textContent = "Cost: " + format(player.pbCost) + " Alpha"
-        player.perBangMult += 1
-    }
-}
-
-export function bangspeed() {
-    if(player.alphaNum >= player.bangSpeedCost) {
-        player.alphaNum -= player.bangSpeedCost
-        player.bangSpeedBought += 1
-        if(player.bangSpeedBought <= 3) {
-            player.bangTime = Math.ceil(player.bangTime / 2)
-            player.bangSpeedCost *= 2
-            document.getElementById("divbangspeedcost").textContent = "Cost: " + format(player.bangSpeedCost) + " Alpha"
-        }
-        else {
-            player.bangTime = Math.ceil(player.bangTime / 2)
-            player.bangSpeedCost *= 5
-            document.getElementById("divbangspeedcost").textContent = "Cost: " + format(player.bangSpeedCost) + " Alpha"
-        }
-    }
-}
 
 export function unlockpca() {
     if(player.alphaNum >= 20) {
@@ -399,7 +372,8 @@ function fgbtest() {
             document.getElementById("divgenunlockcost").style.display='none'
             document.getElementById("gbunlockbutton").style.display='none'
         }
-        
+
+        player.bangTime = Math.ceil(300/Math.pow(2, getUpgradeTimesBought('bangspeed')))
         if(player.bangTimeLeft == 0) {
             player.alphaAcceleratorsLeft += getUpgradeTimesBought('alphaacc')
             player.alphaNum += player.alphaInc * player.alphaAcceleratorsLeft * (getUpgradeTimesBought('perbang')+1) * player.napOff * Math.pow(2, player.alphaMachineMulti)

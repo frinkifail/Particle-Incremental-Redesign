@@ -23,11 +23,21 @@ export const upgrades = {
     'alphaacc': {  scaleFunction: AAExtra(1000), costDiv: "divalphaacceleratorcost", currency: "num"},
     'tb': {  scaleFunction: scaleMultiplier(4), costDiv: "divthreeboostcost", currency: "alphaNum"},
     'perbang': {  scaleFunction: scaleMultiplier(4), costDiv: "divperbangcost", currency: "alphaNum"},
+    'bangspeed': {  scaleFunction: scaleBangSpeed, costDiv: "divbangspeedcost", currency: "alphaNum"},
 }
 
 export function scaleMultiplier(multiplier) {
     return function (upgradeName) {
         setUpgradeCost( upgradeName, getUpgradeCost(upgradeName) * multiplier);
+    }
+}
+
+export function scaleBangSpeed(upgradeName) {
+    if(getUpgradeTimesBought(upgradeName) <= 3) {
+        scaleMultiplier(2)
+    }
+    else {
+        scaleMultiplier(5)
     }
 }
 
@@ -76,7 +86,7 @@ export function scaleGen(upgradeName) {
         setUpgradeCost(upgradeName, 1000)
     }
     else {
-        scaleMultiplier(4)(upgradeName) //please sned help AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
+        scaleMultiplier(4)(upgradeName)
     }
 }
 

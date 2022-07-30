@@ -71,8 +71,10 @@ function loadMisc() {
     //^ post-reformat
     //(down) pre-format
     document.getElementById("divupgradepcacost").textContent = "Cost: " + format(player.pcaUpCost) + " Alpha"
-    if(player.pcaUnlocked) {
-        document.getElementById("divunlockpca").textContent = "Unlocked"
+    if(getUpgradeTimesBought('unlockpca') == 1) {
+        document.getElementById("pcashow").style.display='block'
+        document.getElementById("divunlockpca").style.display='none'
+        document.getElementById("divunlockpcabutton").style.display='none'
         document.getElementById("untilpca").textContent = player.pcaTimeLeft + " left until next autobuy"
         document.getElementById("divtogglepca").style.display='inline-block'
         if(player.pcaToggle) {
@@ -156,14 +158,6 @@ window.bang = function () {
     }
 }
 const bang = window.bang
-
-export function unlockpca() {
-    if(player.alphaNum >= 20) {
-        player.alphaNum -= 20
-        document.getElementById("divunlockpca").textContent = "Unlocked"
-        player.pcaUnlocked = true
-    }
-}
 
 export function upgradepca() {
     if(player.pcaUnlocked) {
@@ -437,7 +431,10 @@ function fgbtest() {
     }
 
 function pcatest() {
-    if(player.pcaUnlocked == true) {
+    if(getUpgradeTimesBought('unlockpca') == 1) {
+        document.getElementById("pcashow").style.display='block'
+        document.getElementById("divunlockpca").style.display='none'
+        document.getElementById("divunlockpcabutton").style.display='none'
         if(player.pcaToggle == true) {
             if(player.pcaTimeLeft == 0) {
                 player.pcaTimeLeft = player.pcaTime

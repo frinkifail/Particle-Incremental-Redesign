@@ -24,6 +24,7 @@ export const upgrades = {
     'tb': {  scaleFunction: scaleMultiplier(4), costDiv: "divthreeboostcost", currency: "alphaNum"},
     'perbang': {  scaleFunction: scaleMultiplier(4), costDiv: "divperbangcost", currency: "alphaNum"},
     'bangspeed': {  scaleFunction: scaleBangSpeed, costDiv: "divbangspeedcost", currency: "alphaNum"},
+    'unlockpca': {  scaleFunction: scaleMultiplier(Infinity), costDiv: "divunlockpca", currency: "alphaNum"},
 }
 
 export function scaleMultiplier(multiplier) {
@@ -34,10 +35,10 @@ export function scaleMultiplier(multiplier) {
 
 export function scaleBangSpeed(upgradeName) {
     if(getUpgradeTimesBought(upgradeName) <= 3) {
-        scaleMultiplier(2)
+        scaleMultiplier(2)(upgradeName)
     }
     else {
-        scaleMultiplier(5)
+        scaleMultiplier(5)(upgradeName)
     }
 }
 

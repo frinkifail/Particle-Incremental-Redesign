@@ -79,8 +79,6 @@ function loadMisc() {
     }
     //^ post-reformat
     //(down) pre-format
-    document.getElementById("divboosterupcost").textContent = format(player.bpUpCost) + " Alpha particles"
-    document.getElementById("divboosteruppercentcost").textContent = format(player.bpPercentCost) + " Alpha particles"
     document.getElementById("omegabasecost").textContent = "Cost: " + format(player.omegaBaseCost)
     document.getElementById("divobase").textContent = "You have " + format(player.omegaBase)
     document.getElementById("omegaalphacost").textContent = "Cost: " + format(player.omegaAlphaCost)
@@ -207,24 +205,6 @@ window.autosavesettings = function () {
     autosavetextanddelayupdate()
 }
 
-export function boosterup() {
-    if(player.alphaNum >= player.bpUpCost) {
-        player.alphaNum -= player.bpUpCost
-        player.bpUpCost *= 10
-        player.bpGainMult += 1
-        document.getElementById("divboosterupcost").textContent = format(player.bpUpCost) + " Alpha particles"
-    }
-}
-
-export function boosteruppercent() {
-    if(player.alphaNum >= player.bpPercentCost) {
-        player.alphaNum -= player.bpPercentCost
-        player.bpPercentCost *= 10
-        player.bpPercent += 1
-        document.getElementById("divboosteruppercentcost").textContent = format(player.bpPercentCost) + " Alpha particles"
-    }
-}
-
 export function buyomegabase() {
     if(player.num >= player.omegaBaseCost) {
         player.num -= player.omegaBaseCost
@@ -347,7 +327,7 @@ function fgbtest() {
         }
 
         const alphagaindisplay = player.alphaInc * getUpgradeTimesBought('alphaacc') * (getUpgradeTimesBought('perbang')+1) * player.napOff * Math.pow(2, player.alphaMachineMulti)
-        const gain = (getUpgradeTimesBought('bb')+1) * getUpgradeTimesBought('gen') * (getUpgradeTimesBought('speed')/10+0.1) * player.gbMult * (getUpgradeTimesBought('nuclearbuy')+1) * (getUpgradeTimesBought('nuclearbuy')+1) * Math.pow(3, getUpgradeTimesBought('tb')) * player.tempBoost * (1 + (((player.boosterParticles / 100) * player.bpPercent) / 100))
+        const gain = (getUpgradeTimesBought('bb')+1) * getUpgradeTimesBought('gen') * (getUpgradeTimesBought('speed')/10+0.1) * player.gbMult * (getUpgradeTimesBought('nuclearbuy')+1) * (getUpgradeTimesBought('nuclearbuy')+1) * Math.pow(3, getUpgradeTimesBought('tb')) * player.tempBoost * (1 + (((player.boosterParticles / 100) * (getUpgradeTimesBought('boosteruppercent')+1)) / 100))
 
         document.getElementById("alphapb").textContent = "You are getting " + format(alphagaindisplay) + " Alpha/bang"
         player.bangTimeLeft -= 1
@@ -368,8 +348,8 @@ function fgbtest() {
         player.untilBoost -= 1
         if(player.untilBoost == 0) {
             player.untilBoost = 10
-            player.boosterParticles += player.alphaNum * player.bpGainMult
-            document.getElementById("boostersmaintext").textContent = "You are currently getting " + format(player.bpGainMult) + " booster particles per alpha particle per second, resulting in a +" + format(player.boosterParticles * player.bpPercent / 100) + "% boost to base particle production"
+            player.boosterParticles += player.alphaNum * (getUpgradeTimesBought('boosterup')+1)
+            document.getElementById("boostersmaintext").textContent = "You are currently getting " + format((getUpgradeTimesBought('boosterup')+1)) + " booster particles per alpha particle per second, resulting in a +" + format(player.boosterParticles * (getUpgradeTimesBought('boosteruppercent')+1) / 100) + "% boost to base particle production"
         }
         document.getElementById("bpamount").textContent = "You have " + format(player.boosterParticles) + " booster particles" 
 

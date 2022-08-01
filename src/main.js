@@ -68,23 +68,17 @@ function loadMisc() {
     }
     document.getElementById("divnp").textContent = "Nuclear Particles: " + getUpgradeTimesBought('nuclearbuy')
     document.getElementById("chunkamount").textContent = "Particle Chunks: " + format(player.pChunks)
-    //^ post-reformat
-    //(down) pre-format
-    document.getElementById("divupgradepcacost").textContent = "Cost: " + format(player.pcaUpCost) + " Alpha"
     if(getUpgradeTimesBought('unlockpca') == 1) {
         document.getElementById("pcashow").style.display='block'
         document.getElementById("divunlockpca").style.display='none'
         document.getElementById("divunlockpcabutton").style.display='none'
         document.getElementById("untilpca").textContent = player.pcaTimeLeft + " left until next autobuy"
         document.getElementById("divtogglepca").style.display='inline-block'
-        if(player.pcaToggle) {
-            document.getElementById("divtogglepca").textContent = "On"
-        }
-        else {
-            document.getElementById("divtogglepca").textContent = "Off"
-        }
+        if(player.pcaToggle) { document.getElementById("divtogglepca").textContent = "On" }
+        else { document.getElementById("divtogglepca").textContent = "Off" }
     }
-    document.getElementById("divupgradepcacost").textContent = "Cost: " + format(player.pcaUpCost) + " Alpha"
+    //^ post-reformat
+    //(down) pre-format
     document.getElementById("divboosterupcost").textContent = format(player.bpUpCost) + " Alpha particles"
     document.getElementById("divboosteruppercentcost").textContent = format(player.bpPercentCost) + " Alpha particles"
     document.getElementById("omegabasecost").textContent = "Cost: " + format(player.omegaBaseCost)
@@ -159,34 +153,12 @@ window.bang = function () {
 }
 const bang = window.bang
 
-export function upgradepca() {
-    if(player.pcaUnlocked) {
-        if(player.alphaNum >= player.pcaUpCost) {
-            player.alphaNum -= player.pcaUpCost
-            player.pcaUpCost *= 3
-            player.pcaUpBought += 1
-            if(player.pcaUpBought <= 4) {
-                player.pcaTime = Math.ceil(player.pcaTime / 2)
-            }
-            else {
-                player.pcaTime = Math.ceil(10 / player.pcaFracMult)
-                player.pcaFracMult++
-            }
-            document.getElementById("divupgradepcacost").textContent = "Cost: " + format(player.pcaUpCost) + " Alpha"
-        }
-    }
-}
-
-export function togglepca() {
-    if(player.pcaUnlocked) {
+window.togglepca = function () {
+    if(getUpgradeTimesBought('unlockpca') == 1) {
         player.pcaToggle = !player.pcaToggle
         document.getElementById("divtogglepca").style.display='inline-block'
-        if(player.pcaToggle) {
-            document.getElementById("divtogglepca").textContent = "On"
-        }
-        else {
-            document.getElementById("divtogglepca").textContent = "Off"
-        }
+        if(player.pcaToggle) { document.getElementById("divtogglepca").textContent = "On" }
+        else { document.getElementById("divtogglepca").textContent = "Off" }
     }
 }
 

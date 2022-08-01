@@ -18,13 +18,14 @@ export const upgrades = {
     'mbmult': {  scaleFunction: scaleMultiplier(3), costDiv: "divmbmultcost", currency: "num"},
     'unlockgb': {  scaleFunction: scaleMultiplier(Infinity), costDiv: "divgenunlockcost", currency: "num"},
     'gbupt': {  scaleFunction: GBTExtra(scaleMultiplier(5)), costDiv: "divgbuptcost", currency: "num"},
-    'gbupm': {  scaleFunction: GBMExtra(5), costDiv: "divgbupmcost", currency: "num"},
-    'nuclearbuy': {  scaleFunction: NBExtra(7), costDiv: "divnuclearcost", currency: "num"},
-    'alphaacc': {  scaleFunction: AAExtra(1000), costDiv: "divalphaacceleratorcost", currency: "num"},
+    'gbupm': {  scaleFunction: GBMExtra(scaleMultiplier(5)), costDiv: "divgbupmcost", currency: "num"},
+    'nuclearbuy': {  scaleFunction: NBExtra(scaleMultiplier(7)), costDiv: "divnuclearcost", currency: "num"},
+    'alphaacc': {  scaleFunction: AAExtra(scaleMultiplier(1000)), costDiv: "divalphaacceleratorcost", currency: "num"},
     'tb': {  scaleFunction: scaleMultiplier(4), costDiv: "divthreeboostcost", currency: "alphaNum"},
     'perbang': {  scaleFunction: scaleMultiplier(4), costDiv: "divperbangcost", currency: "alphaNum"},
     'bangspeed': {  scaleFunction: scaleBangSpeed, costDiv: "divbangspeedcost", currency: "alphaNum"},
     'unlockpca': {  scaleFunction: scaleMultiplier(Infinity), costDiv: "divunlockpca", currency: "alphaNum"},
+    'upgradepca': {  scaleFunction: PCAExtra(scaleMultiplier(3)), costDiv: "divupgradepcacost", currency: "alphaNum"},
 }
 
 export function scaleMultiplier(multiplier) {
@@ -75,6 +76,17 @@ export function AAExtra(scaler) {
     }
 }
 
+export function PCAExtra(scaler) {
+    return function (upgradeName) {
+        scaler(upgradeName)
+        if(getUpgradeTimesBought('upgradepca') <= 4) {
+            player.pcaTime = Math.ceil(player.pcaTime / 2)
+        }
+        else {
+            player.pcaTime = Math.ceil(10 / (getUpgradeTimesBought('upgradepca')-3))
+        }
+    }
+}
 
 export function scaleSpeed(upgradeName) {
     if(getUpgradeTimesBought(upgradeName) % 10 == 0) {

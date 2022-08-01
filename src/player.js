@@ -38,8 +38,6 @@ export function load() {
             alphaInc: 1,
             eSetting: 1e+4,
             tempBoost: 1,
-            bangSpeedCost: 1,
-            bangSpeedBought: 0,
             pcaToggle: true,
             pcaUpCost: 2,
             pcaTime: 160,

@@ -205,7 +205,7 @@ window.autosavesettings = function () {
     autosavetextanddelayupdate()
 }
 
-export function buyomegabase() {
+window.buyomegabase = function () {
     if(player.num >= player.omegaBaseCost) {
         player.num -= player.omegaBaseCost
         player.omegaBase +=1
@@ -215,7 +215,7 @@ export function buyomegabase() {
     }
 }
 
-export function buyomegaalpha() {
+window.buyomegaalpha = function () {
     if(player.alphaNum >= player.omegaAlphaCost) {
         player.alphaNum -= player.omegaAlphaCost
         player.omegaAlpha += 1
@@ -224,9 +224,9 @@ export function buyomegaalpha() {
         document.getElementById("divoalpha").textContent = "You have " + format(player.omegaAlpha)
     }
 }
-export function buyomegabeta() {}
-export function buyomegagamma() {}
-export function buyomegadelta() {}
+window.buyomegabeta = function () {}
+window.buyomegagamma = function () {}
+window.buyomegadelta = function () {}
 
 export function buybangautobuyer() {
     if(!player.bangAutobuyerUnlocked) {

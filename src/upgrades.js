@@ -6,6 +6,7 @@ export function UpdateCostVal(elementID, variable, currency = "num") {
     const currencyName = {
         'num': '',
         'alphaNum': ' Alpha',
+        'omegaBase': ' Ω<sub>B</sub>',
     }
     document.getElementById(elementID).textContent = "Cost: " + format(variable) + currencyName[currency]
 }
@@ -27,7 +28,11 @@ export const upgrades = {
     'unlockpca': {  scaleFunction: scaleMultiplier(Infinity), costDiv: "divunlockpca", currency: "alphaNum"},
     'upgradepca': {  scaleFunction: PCAExtra(scaleMultiplier(3)), costDiv: "divupgradepcacost", currency: "alphaNum"},
     'boosterup': {  scaleFunction: scaleMultiplier(10), costDiv: "divboosterupcost", currency: "alphaNum"},
-    'boosteruppercent': {  scaleFunction: scaleMultiplier(10), costDiv: "divboosteruppercentcost", currency: "alphaNum"},
+    'nuclearalphabuy': {  scaleFunction: NABExtra(scaleMultiplier(7)), costDiv: "divnuclearalphacost", currency: "alphaNum"},
+    'gboostdouble': {  scaleFunction: GBDExtra(scaleMultiplier(2)), costDiv: "gboostdouble", currency: "alphaNum"},
+    'alphamachinedouble': {  scaleFunction: scaleMultiplier(3), costDiv: "alphamachinedouble", currency: "alphaNum"},
+    'baunlock': {  scaleFunction: scaleMultiplier(Infinity), costDiv: "divbau", currency: "omegaBase"},
+    'upgradeba': {  scaleFunction: BAExtra(), costDiv: "divupgradeba", currency: "omegaBase"},
 }
 
 export function scaleMultiplier(multiplier) {
@@ -48,7 +53,7 @@ export function scaleBangSpeed(upgradeName) {
 export function GBTExtra(scaler) {
     return function (upgradeName) {
        scaler(upgradeName)
-       player.gbTimeLeftCon += 20 * Math.pow(2, player.gBoostSquare)
+       player.gbTimeLeftCon += 20 * Math.pow(2, getUpgradeTimesBought('gboostdouble'))
        player.gbTimeLeft = 0
        player.gbTimeLeft = player.gbTimeLeftCon
     }
@@ -61,11 +66,25 @@ export function GBMExtra(scaler) {
         player.gbTimeLeft = player.gbTimeLeftCon
     }
 }
+export function GBDExtra(scaler) {
+    return function (upgradeName) {
+        scaler(upgradeName)
+        player.gbTimeLeftCon *= 2
+        player.gbTimeLeft = 0
+        player.gbTimeLeft = player.gbTimeLeftCon
+    }
+}
 
 export function NBExtra(scaler) {
     return function (upgradeName) {
         scaler(upgradeName)
         document.getElementById("divnp").textContent = "Nuclear Particles: " + getUpgradeTimesBought('nuclearbuy')
+    }
+}
+export function NABExtra(scaler) {
+    return function (upgradeName) {
+        scaler(upgradeName)
+        document.getElementById("divnap").textContent = "Nuclear Particles: " + getUpgradeTimesBought('nuclearalphabuy')
     }
 }
 
@@ -86,6 +105,18 @@ export function PCAExtra(scaler) {
         }
         else {
             player.pcaTime = Math.ceil(10 / (getUpgradeTimesBought('upgradepca')-3))
+        }
+    }
+}
+
+export function BAExtra() {
+    return function (upgradeName) {
+        setUpgradeCost( upgradeName, getUpgradeCost(upgradeName)+1)
+        if(getUpgradeTimesBought('upgradeba') <= 4) {
+            player.baTime = Math.ceil(player.baTime / 2)
+        }
+        else {
+            player.baTime = Math.ceil(10 / (getUpgradeTimesBought('upgradeba')-3))
         }
     }
 }

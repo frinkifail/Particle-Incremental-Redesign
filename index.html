@@ -137,25 +137,25 @@
               </div>
             </div>
           </div>
-          <div id="nuclearalphashow" style="display:none; border:0.2em solid #333333; padding-left: 10px; padding-bottom: 5px; padding-right: 10px; border-radius: 5px" class="withtheoutline">
-            <h2>Nuclear Alpha boost</h2>
-            <button onclick="nuclearalphabuy()" class="button">Buy Nuclear Alpha Particle</button>
-            <div id="divnuclearalphacost">Cost: 1e6 Alpha</div>
-            <div id="divnap">Nuclear Alpha Particles: 0</div>
-            Nuclear particles add a +1x multipler to Alpha gain
-            <br>
-            <br>
-          </div>
-          <div id="nuclearalphareach">Reach 1e6 Alpha to unlock Nuclear Alpha boosts!</div>
           <div style="border:0.2em solid #333333; padding-left: 10px; padding-bottom: 5px; padding-right: 10px; border-radius: 5px" class="withtheoutline">
             <h2>TAL Machine</h2>
             <div class="btn-group">
-              <button onclick="gboostdouble()" class="button">Double Generator Boost Length</button>
-              <button onclick="alphamachinedouble()" class="button">Double Alpha Gain</button>
+              <button onclick="buyUpgrade('gboostdouble')" class="button">Double Generator Boost Length</button>
+              <button onclick="buyUpgrade('alphamachinedouble')" class="button">Double Alpha Gain</button>
             </div>
             <div id="gboostdouble">Cost: 1 Alpha</div>
             <div id="alphamachinedouble">Cost: 1000 Alpha</div>
           </div>
+          <div id="nuclearalphashow" style="display:none; border:0.2em solid #333333; padding-left: 10px; padding-bottom: 5px; padding-right: 10px; border-radius: 5px" class="withtheoutline">
+            <h2>Nuclear Alpha boost</h2>
+            <button onclick="buyUpgrade('nuclearalphabuy')" class="button">Buy Nuclear Alpha Particle</button>
+            <div id="divnuclearalphacost">Cost: 1e6 Alpha</div>
+            <div id="divnap">Nuclear Alpha Particles: 0</div>
+            Nuclear Alpha particles add a +1x multipler to Alpha gain
+            <br>
+            <br>
+          </div>
+          <div id="nuclearalphareach">Reach 1e6 Alpha to unlock Nuclear Alpha boosts!</div>
         </div>
         <br>
         <div id="bpsection" style="border:0.2em solid #333333; padding-left: 10px; padding-bottom: 5px; padding-right: 10px; border-radius: 5px" class="withtheoutline">
@@ -210,15 +210,17 @@
         <button onclick="openTab('oOmega')" class="button" style="display:none">Omega</button>
         <div id="oBase" style="display:block">
           <br>
-          <div class="btn-group">
-            <button onclick="buybangautobuyer()" class="button">Unlock bang autobuyer</button>
-            <button onclick="upgradeba()" class="button">Make bang autobuyer faster</button>
-            <button onclick="toggleba()" class="button">Toggle bang autobuyer</button>
-          </div>
+          <button id="baunlockbutton" onclick="buyUpgrade('baunlock')" class="button">Unlock bang autobuyer</button>
           <div id="divbau">Cost: 1 Ω<sub>B</sub></div>
-          <div id="divupgradeba">Cost: 1 Ω<sub>B</sub></div>
-          <div id="divtoggleba">On</div>
-          <div id="untilba">0</div>
+          <div id="bashow" style="display:none">
+            <div class="btn-group">
+              <button onclick="buyUpgrade('upgradeba')" class="button">Make bang autobuyer faster</button>
+              <button onclick="toggleba()" class="button">Toggle bang autobuyer</button>
+            </div>
+            <div id="divupgradeba">Cost: 1 Ω<sub>B</sub></div>
+            <div id="divtoggleba">On</div>
+            <div id="untilba">0</div>
+          </div>
         </div>
         <div id="oAlpha" style="display:none">
           <br>
@@ -303,7 +305,7 @@
       <br>
       Changelog:
       <br>
-      code rewrite, bugfixes, slight balancing, added version codename, changed unlock button behavior, other slight tweaks
+      code rewrite, bugfixes, slight balancing, added version codename, changed unlock button behavior, UI tweaks, other slight tweaks
     </div>
     </body>
 </html>

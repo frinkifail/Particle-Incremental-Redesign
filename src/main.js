@@ -67,6 +67,7 @@ function loadMisc() {
         document.getElementById("gbunlockbutton").style.display='none'
     }
     document.getElementById("divnp").textContent = "Nuclear Particles: " + getUpgradeTimesBought('nuclearbuy')
+    document.getElementById("divnap").textContent = "Nuclear Alpha Particles: " + getUpgradeTimesBought('nuclearalphabuy')
     document.getElementById("chunkamount").textContent = "Particle Chunks: " + format(player.pChunks)
     if(getUpgradeTimesBought('unlockpca') == 1) {
         document.getElementById("pcashow").style.display='block'
@@ -77,15 +78,11 @@ function loadMisc() {
         if(player.pcaToggle) { document.getElementById("divtogglepca").textContent = "On" }
         else { document.getElementById("divtogglepca").textContent = "Off" }
     }
-    //^ post-reformat
-    //(down) pre-format
-    document.getElementById("omegabasecost").textContent = "Cost: " + format(player.omegaBaseCost)
-    document.getElementById("divobase").textContent = "You have " + format(player.omegaBase)
-    document.getElementById("omegaalphacost").textContent = "Cost: " + format(player.omegaAlphaCost)
-    document.getElementById("divoalpha").textContent = "You have " + format(player.omegaAlpha)
-    if(player.bangAutobuyerUnlocked) {
-        document.getElementById("divbau").textContent = "Unlocked"
-        document.getElementById("untilba").textContent = player.pcaTimeLeft + " left until next autobuy"
+    if(getUpgradeTimesBought('baunlock') == 1) {
+        document.getElementById("bashow").style.display='block'
+        document.getElementById("divbau").style.display='none'
+        document.getElementById("baunlockbutton").style.display='none'
+        document.getElementById("untilba").textContent = player.baTimeLeft + " left until next autobuy"
         document.getElementById("divtoggleba").style.display='inline-block'
         if(player.baToggle) {
             document.getElementById("divtoggleba").textContent = "On"
@@ -94,8 +91,10 @@ function loadMisc() {
             document.getElementById("divtoggleba").textContent = "Off"
         }
     }
-    document.getElementById("gboostdouble").textContent = "Cost: " + format(player.gBoostDoubleCost) + " Alpha"
-    document.getElementById("alphamachinedouble").textContent = "Cost: " + format(player.alphaMachineDoubleCost) + " Alpha"
+    document.getElementById("omegabasecost").textContent = "Cost: " + format(player.omegaBaseCost)
+    document.getElementById("divobase").textContent = "You have " + format(player.omegaBase)
+    document.getElementById("omegaalphacost").textContent = "Cost: " + format(player.omegaAlphaCost)
+    document.getElementById("divoalpha").textContent = "You have " + format(player.omegaAlpha)
 }
 
 function makeElementMap(...names) {
@@ -127,7 +126,6 @@ window.mbman = function () {
 window.gbboost = function () {
     player.gbTimeLeft = player.gbTimeLeftCon
 }
-const gbboost = window.gbboost
 
 window.makechunk = function () {
     if(player.num >= 1e+9) {
@@ -228,38 +226,8 @@ window.buyomegabeta = function () {}
 window.buyomegagamma = function () {}
 window.buyomegadelta = function () {}
 
-export function buybangautobuyer() {
-    if(!player.bangAutobuyerUnlocked) {
-        if(player.omegaBase >= 1) {
-            player.omegaBase -= 1
-            player.bangAutobuyerUnlocked = true
-            document.getElementById("divbau").textContent = "Unlocked"
-            document.getElementById("divobase").textContent = "You have " + format(player.omegaBase)
-        }
-    }
-}
-
-export function upgradeba() {
-    if(player.bangAutobuyerUnlocked) {
-        if(player.omegaBase >= player.baUpCost) {
-            player.omegaBase -= player.baUpCost
-            player.baUpCost += 1
-            player.baUpBought += 1
-            if(player.baUpBought <= 4) {
-                player.baTime = Math.ceil(player.baTime / 2)
-            }
-            else {
-                player.baTime = Math.ceil(10 / player.baFracMult)
-                player.baFracMult++
-            }
-            document.getElementById("divupgradeba").innerHTML = "Cost: " + format(player.baUpCost) + " Ω<sub>B</sub>"
-            document.getElementById("divobase").textContent = "You have " + format(player.omegaBase)
-        }
-    }
-}
-
-export function toggleba() {
-    if(player.bangAutobuyerUnlocked) {
+window.toggleba = function () {
+    if(getUpgradeTimesBought('baunlock') == 1) {
         player.baToggle = !player.baToggle
         document.getElementById("divtoggleba").style.display='inline-block'
         if(player.baToggle) {
@@ -268,37 +236,6 @@ export function toggleba() {
         else {
             document.getElementById("divtoggleba").textContent = "Off"
         }
-    }
-}
-
-export function nuclearalphabuy() {
-    if(player.alphaNum >= player.nuclearAlphaCost) {
-        player.alphaNum -= player.nuclearAlphaCost
-        player.nuclearAlphaCost *= 7
-        document.getElementById("divnuclearalphacost").textContent = "Cost: " + format(player.nuclearAlphaCost) + " Alpha"
-        player.napOff += 1
-        document.getElementById("divnap").textContent = "Nuclear Alpha Particles: " + format(player.napOff - 1)
-    }
-}
-
-export function gboostdouble() {
-    if(player.alphaNum >= player.gBoostDoubleCost) {
-        player.alphaNum -= player.gBoostDoubleCost
-        player.gBoostDoubleCost *= 2
-        player.gbTimeLeftCon *= 2
-        player.gBoostSquare += 1
-        player.gbTimeLeft = 0
-        gbboost()
-        document.getElementById("gboostdouble").textContent = "Cost: " + format(player.gBoostDoubleCost) + " Alpha"
-    }
-}
-
-export function alphamachinedouble() {
-    if(player.alphaNum >= player.alphaMachineDoubleCost) {
-        player.alphaNum -= player.alphaMachineDoubleCost
-        player.alphaMachineDoubleCost *= 3
-        player.alphaMachineMulti += 1
-        document.getElementById("alphamachinedouble").textContent = "Cost: " + format(player.alphaMachineDoubleCost) + " Alpha"
     }
 }
 
@@ -322,11 +259,11 @@ function fgbtest() {
         player.bangTime = Math.ceil(300/Math.pow(2, getUpgradeTimesBought('bangspeed')))
         if(player.bangTimeLeft == 0) {
             player.alphaAcceleratorsLeft += getUpgradeTimesBought('alphaacc')
-            player.alphaNum += player.alphaInc * player.alphaAcceleratorsLeft * (getUpgradeTimesBought('perbang')+1) * player.napOff * Math.pow(2, player.alphaMachineMulti)
+            player.alphaNum += player.alphaAcceleratorsLeft * (getUpgradeTimesBought('perbang')+1) * (getUpgradeTimesBought('nuclearalphabuy')+1) * Math.pow(2, getUpgradeTimesBought('alphamachinedouble'))
             document.getElementById("bangtimeleft").textContent = ""
         }
 
-        const alphagaindisplay = player.alphaInc * getUpgradeTimesBought('alphaacc') * (getUpgradeTimesBought('perbang')+1) * player.napOff * Math.pow(2, player.alphaMachineMulti)
+        const alphagaindisplay = getUpgradeTimesBought('alphaacc') * (getUpgradeTimesBought('perbang')+1) * (getUpgradeTimesBought('nuclearalphabuy')+1) * Math.pow(2, getUpgradeTimesBought('alphamachinedouble'))
         const gain = (getUpgradeTimesBought('bb')+1) * getUpgradeTimesBought('gen') * (getUpgradeTimesBought('speed')/10+0.1) * player.gbMult * (getUpgradeTimesBought('nuclearbuy')+1) * (getUpgradeTimesBought('nuclearbuy')+1) * Math.pow(3, getUpgradeTimesBought('tb')) * player.tempBoost * (1 + (((player.boosterParticles / 100) * (getUpgradeTimesBought('boosteruppercent')+1)) / 100))
 
         document.getElementById("alphapb").textContent = "You are getting " + format(alphagaindisplay) + " Alpha/bang"
@@ -361,6 +298,11 @@ function fgbtest() {
             player.tempBoost = 1
             document.getElementById("tmp").style.display='none'
         }
+
+        document.getElementById("omegabasecost").textContent = "Cost: " + format(player.omegaBaseCost)
+        document.getElementById("divobase").textContent = "You have " + format(player.omegaBase)
+        document.getElementById("omegaalphacost").textContent = "Cost: " + format(player.omegaAlphaCost)
+        document.getElementById("divoalpha").textContent = "You have " + format(player.omegaAlpha)
 
         player.num += gain
         document.getElementById("particlespersecond").textContent = "You are getting " + format(gain * 10) + " particles/s"
@@ -399,7 +341,10 @@ function pcatest() {
 }
 
 function batest() {
-    if(player.bangAutobuyerUnlocked == true) {
+    if(getUpgradeTimesBought('baunlock') == 1) {
+        document.getElementById("bashow").style.display='block'
+        document.getElementById("divbau").style.display='none'
+        document.getElementById("baunlockbutton").style.display='none'
         if(player.baToggle == true) {
             if(player.baTimeLeft == 0) {
                 player.baTimeLeft = player.baTime

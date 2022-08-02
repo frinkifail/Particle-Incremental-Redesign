@@ -6,7 +6,7 @@ export function UpdateCostVal(elementID, variable, currency = "num") {
     const currencyName = {
         'num': '',
         'alphaNum': ' Alpha',
-        'omegaBase': ' Ω<sub>B</sub>',
+        'omegaBase': ' ',
     }
     document.getElementById(elementID).textContent = "Cost: " + format(variable) + currencyName[currency]
 }

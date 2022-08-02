@@ -68,6 +68,7 @@ export function load() {
     }
     if(player.version != "b1.21.0") {
         player.version = "b1.21.0";
-        alert("This specific version completely breaks compatibility with older saves. Sorry for the inconvenience.");
+        alert("IMPORTANT! This specific version completely breaks compatibility with older saves. Sorry for the inconvenience. Your save has been wiped. Refresh and your progress is lost. Sorry, but there's no other way.");
+        localStorage.removeItem('savefile');
     }
 }

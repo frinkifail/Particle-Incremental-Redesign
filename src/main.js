@@ -81,6 +81,7 @@ function loadMisc() {
     if(getUpgradeTimesBought('baunlock') == 1) {
         document.getElementById("bashow").style.display='block'
         document.getElementById("divbau").style.display='none'
+        document.getElementById("divbauextra").style.display='none'
         document.getElementById("baunlockbutton").style.display='none'
         document.getElementById("untilba").textContent = player.baTimeLeft + " left until next autobuy"
         document.getElementById("divtoggleba").style.display='inline-block'
@@ -344,6 +345,7 @@ function batest() {
     if(getUpgradeTimesBought('baunlock') == 1) {
         document.getElementById("bashow").style.display='block'
         document.getElementById("divbau").style.display='none'
+        document.getElementById("divbauextra").style.display='none'
         document.getElementById("baunlockbutton").style.display='none'
         if(player.baToggle == true) {
             if(player.baTimeLeft == 0) {

@@ -139,7 +139,7 @@ const makechunk = window.makechunk
 
 window.bang = function () {
     if(player.pChunks >= 2) {
-        if(getUpgradeTimesBought('alphaacc') > 0) {
+        if(getUpgradeTimesBought('alphaacc') > 0 && !(player.bangTimeLeft > 0 && player.bangTimeLeft < player.bangTime)) {
             player.alphaAcceleratorsLeft -= getUpgradeTimesBought('alphaacc')
             player.pChunks -=2
             player.bangTimeLeft = player.bangTime
@@ -273,10 +273,12 @@ function fgbtest() {
             document.getElementById("bangtimeleft").textContent = "Bang time left: " + player.bangTimeLeft
             document.getElementById("divalphaacceleratorcost").style.display='none'
             document.getElementById("aabutton").style.display='none'
+            document.getElementById("bangbutton").style.display='none'
         }
         else {
             document.getElementById("divalphaacceleratorcost").style.display='inline-block'
             document.getElementById("aabutton").style.display='inline-block'
+            document.getElementById("bangbutton").style.display='block'
         }
         if(player.gbTimeLeft > 0) {
             player.gbTimeLeft -= 1

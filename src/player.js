@@ -6,7 +6,7 @@ export function getUpgradeTimesBought(upgradeName) { return player.upgrades[upgr
 export function load() {
     if(localStorage.getItem('savefile') == null) {
         player = {
-            version: "b1.21.1",
+            version: "b1.21.2",
             upgrades: { 
                 'gen': { cost: 0, timesBought: 0 },
                 'bb': { cost: 2000, timesBought: 0},
@@ -66,8 +66,8 @@ export function load() {
     else {
         player = JSON.parse(localStorage.getItem('savefile'))
     }
-    if(player.version != "b1.21.1") {
-        player.version = "b1.21.1";
+    if(player.version != "b1.21.2") {
+        player.version = "b1.21.2";
         //alert("IMPORTANT! This specific version completely breaks compatibility with older saves. Sorry for the inconvenience. Your save has been wiped. Refresh and your progress is lost. Sorry, but there's no other way.");
     }
 }

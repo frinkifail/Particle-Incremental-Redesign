@@ -28,6 +28,7 @@ export const upgrades = {
     'unlockpca': {  scaleFunction: scaleMultiplier(Infinity), costDiv: "divunlockpca", currency: "alphaNum"},
     'upgradepca': {  scaleFunction: PCAExtra(scaleMultiplier(3)), costDiv: "divupgradepcacost", currency: "alphaNum"},
     'boosterup': {  scaleFunction: scaleMultiplier(10), costDiv: "divboosterupcost", currency: "alphaNum"},
+    'boosteruppercent': {  scaleFunction: scaleMultiplier(10), costDiv: "divboosteruppercentcost", currency: "alphaNum"},
     'nuclearalphabuy': {  scaleFunction: NABExtra(scaleMultiplier(7)), costDiv: "divnuclearalphacost", currency: "alphaNum"},
     'gboostdouble': {  scaleFunction: GBDExtra(scaleMultiplier(2)), costDiv: "gboostdouble", currency: "alphaNum"},
     'alphamachinedouble': {  scaleFunction: scaleMultiplier(3), costDiv: "alphamachinedouble", currency: "alphaNum"},

@@ -1,6 +1,4 @@
-# Particle Incremental Redesign
-Particle Incremental - Redesigned (I reworked the CSS)
+# Particle Incremental
+Particle Incremental is an incremental game which has... particles.
 
-## What is this?
-This is the original Particle Incremental but I rewrote the html/css and themes to my liking.
-(He told me to do it)
+xnoob please add details

@@ -4200,10 +4200,10 @@ load();
 const themes = [
   {
     textColor: "#EBEBEB",
-    bgColor: "#696969",
-    buttonColor: "#999999",
-    borderColor: "#000000",
-    themeName: "Dark"
+    bgColor: "rgb(34, 36, 34)",
+    buttonColor: "",
+    borderColor: "#fafafa",
+    themeName: "Dark Rework"
   },
   {
     textColor: "#EFEFEF",
@@ -4746,7 +4746,7 @@ function fgbTestConst() {
     getEl("omegaalphacost").textContent = "Cost: " + formatb(player.omegaAlphaCost);
     getEl("divoalpha").textContent = "You have " + formatD(player.omegaAlpha, 1);
     player.num = player.num.plus(gain);
-    getEl("particlespersecond").textContent = "You are getting " + formatb(gain.times(10)) + " particles/s";
+    getEl("particlespersecond").innerHTML = "You are getting <span style='color: #ed6464;'>" + formatb(gain.times(10)) + "</span> particles/s";
     if (player.num.gte(1e8)) {
       getEl("nuclearreach").style.display = "none";
       getEl("nuclearshow").style.display = "block";
@@ -4770,7 +4770,7 @@ function fgbTestConst() {
     getEl("npboosttext").textContent = `Your Nuclear Particles Boost is giving you ${formatD(freeNuclearParticles, 1)} free Nuclear Particles`;
     const freeNuclearAlphaParticles = nuclearAlphaParticles.minus(getUpgradeTimesBought("nuclearalphabuy"));
     getEl("napboosttext").textContent = `Your Nuclear Alpha Particles Boost is giving you ${formatD(freeNuclearAlphaParticles, 1)} free Nuclear Alpha Particles`;
-    getEl("counter").textContent = formatb(player.num) + " particles";
+    getEl("counter").innerHTML = "<span style='color: #64ed93;'>"+formatb(player.num) + "</span> particles";
     getEl("clickercounter").textContent = `You have ${formatb(player.clickerParticles)} Clicker Particles (${formatb(clickerParticleGain.times(10))}/s), which are making Manual Boost ${formatbSpecific(clickerParticleMult)}x stronger.`;
     getEl("alphacounter").textContent = formatb(player.alphaNum) + " Alpha particles";
     getEl("betacounter").textContent = formatb(player.betaNum) + " Beta particles";

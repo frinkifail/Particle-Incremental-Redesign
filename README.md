@@ -1,4 +1,2 @@
 # Particle Incremental
-Particle Incremental is an incremental game which has... particles.
-
-xnoob please add details
+Prerelease versions of Particle Incremetal, a game about getting as many particles as possible.

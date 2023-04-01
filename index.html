@@ -44,12 +44,15 @@
 		<div id="Base">
 			<br>
 			<div class="btn-group">
-				<button onclick="buyUpgrade('gen')" class="button" id="divgenbutton">Buy generator</button>
+				<!-- <button onclick="buyUpgrade('gen')" class="button" id="divgenbutton">Buy generator</button> -->
+				<div class="button-card" onclick="buyUpgrade('gen')">
+					<h3>Buy Generator <span id="divgencost">(Free$)</span><!-- hey you, yes you, make this work please --></h3>
+					<h4>Buy a normal particle generator</h4>
+				</div>
 				<button onclick="buyUpgrade('biggerbatches')" class="button">Bigger batches</button>
 				<button onclick="buyUpgrade('speed')" class="button">Speed</button>
 				<button onclick="buyFiftySpeed()" class="button">Buy up to 50 Speed</button>
 			</div>
-			<div id="divgencost">Cost: Free</div>
 			<div id="divbbcost">Cost: 2000</div>
 			<div id="divspeedcost">Cost: 50</div>
 			<div id="divtenspeedcost">Cost: unknown</div>

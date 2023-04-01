@@ -286,7 +286,7 @@ html {background-color: black}
 	/* padding: 16px; */
 	width: 64px;
 	height: 64px;
-	border: 2px solid white;
+	border: none;
 }
 .floating-action-button.page {
 	position: fixed;

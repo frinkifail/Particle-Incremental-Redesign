@@ -45,17 +45,25 @@
 			<br>
 			<div class="btn-group">
 				<!-- <button onclick="buyUpgrade('gen')" class="button" id="divgenbutton">Buy generator</button> -->
-				<div class="button-card" onclick="buyUpgrade('gen')">
+				<div class="button-card util-inlineblock" onclick="buyUpgrade('gen')">
 					<h3>Buy Generator <span id="divgencost">(Free$)</span><!-- hey you, yes you, make this work please --></h3>
 					<h4>Buy a normal particle generator</h4>
 				</div>
-				<button onclick="buyUpgrade('biggerbatches')" class="button">Bigger batches</button>
-				<button onclick="buyUpgrade('speed')" class="button">Speed</button>
-				<button onclick="buyFiftySpeed()" class="button">Buy up to 50 Speed</button>
+				<div class="button-card util-inlineblock" onclick="buyUpgrade('biggerbatches')" style="margin-bottom: 10px;">
+					<h3>Bigger Batches <span id="divbbcost">(2000$)</span><!-- hey you, yes you, make this work please --></h3>
+					<h4>Get some [[BIGGER]] Batches</h4>
+				</div>
+				<!-- <button onclick="buyUpgrade('biggerbatches')" class="button">Bigger batches</button> -->
+				<div class="button-card util-inlineblock" onclick="buyUpgrade('speed')">
+					<h3>Speed <span id="divspeedcost">(2000$)</span><!-- hey you, yes you, make this work please --></h3>
+					<h4>Speediest in [[HOMETOWN]]</h4>
+				</div>
+				<!-- <button onclick="buyUpgrade('speed')" class="button">Speed</button> -->
+				<!-- <button onclick="buyFiftySpeed()" class="button">Buy up to 50 Speed</button> -->
 			</div>
-			<div id="divbbcost">Cost: 2000</div>
-			<div id="divspeedcost">Cost: 50</div>
-			<div id="divtenspeedcost">Cost: unknown</div>
+			<!-- <div id="divbbcost">Cost: 2000</div> -->
+			<!-- <div id="divspeedcost">Cost: 50</div> -->
+			<!-- <div id="divtenspeedcost">Cost: unknown</div> -->
 			<br>
 			<br>
 			<div class="withtheoutline" id="veryouterboost">
@@ -64,7 +72,8 @@
 					<div id="manboostsection">
 						<h3>Manual boost</h3>
 						<div class="btn-group">
-							<button onclick="mbman()" class="button">Manual Boost</button>
+							<!-- <button onclick="mbman()" class="button">Manual Boost</button> -->
+							<button class="floating-action-button page single-icon" onclick="mbman()">+</button>
 							<button onclick="buyUpgrade('mbup')" class="button">Manual Boost +1/click</button>
 							<button onclick="buyUpgrade('mbmult')" class="button">Manual Boost +1x/click</button>
 						</div>

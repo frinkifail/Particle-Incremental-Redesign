@@ -276,3 +276,27 @@ html {background-color: black}
 	margin-top: 10px;
 	text-align: left;
 }
+.util-inlineblock {
+	display: inline-block;
+}
+.floating-action-button {
+	background-color: #004c8b;
+	color: #64b4ed;
+	border-radius: 16px;
+	/* padding: 16px; */
+	width: 64px;
+	height: 64px;
+	border: 2px solid white;
+}
+.floating-action-button.page {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}
+.floating-action-button.single-icon {
+	font-size: 24px;
+	font-weight: bold;
+}
+.floating-action-button:hover {
+	background-color: #0061b0;
+}

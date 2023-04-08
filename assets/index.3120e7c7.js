@@ -3786,9 +3786,9 @@ const currencyName = {
 };
 function UpdateCostVal(elementID, variable, currency = "num", prec = 2) {
   if (prec === 2) {
-    getEl(elementID).textContent = "Cost: " + formatb(variable) + currencyName[currency];
+    getEl(elementID).textContent = "(" + formatb(variable) + "$)" + currencyName[currency];
   } else {
-    getEl(elementID).textContent = "Cost: " + formatD(variable, prec) + currencyName[currency];
+    getEl(elementID).textContent = "(" + formatD(variable, prec) + "$)" + currencyName[currency];
   }
 }
 function Upgrade(x) {
@@ -4371,7 +4371,7 @@ function baTestSingle() {
 }
 function fgbTestSingle() {
   if (getUpgradeTimesBought("gen").eq(0)) {
-    getEl("divgencost").textContent = "Cost: Free";
+    getEl("divgencost").textContent = "(Free)";
   } else {
     UpdateCostVal("divgencost", getUpgradeCost("gen"));
   }
@@ -4657,7 +4657,7 @@ function fgbTestConst() {
       getEl("napboostshow").style.display = "none";
     }
     if (getUpgradeTimesBought("gen").eq(0)) {
-      getEl("divgencost").textContent = "Cost: Free";
+      getEl("divgencost").textContent = "(Free)";
     } else {
       UpdateCostVal("divgencost", getUpgradeCost("gen"));
     }

@@ -1,265 +1,306 @@
 button:hover {
-  border: 2px solid beige;
+	border: 2px solid beige;
 }
 button:active {
-  border: 2px solid #3d3d3d;
+	border: 2px solid #3d3d3d;
 }
 #divgencost {
-  display: inline-block;
+	display: inline-block;
 }
 #divbbcost {
-  display: inline-block;
-  text-indent: 1.25em;
+	display: inline-block;
+	text-indent: 1.25em;
 }
 #divspeedcost {
-  display: inline-block;
-  text-indent: 1.25em;
+	display: inline-block;
+	text-indent: 1.25em;
 }
 #divtenspeedcost {
-  display: inline-block;
-  text-indent: 1.25em;
+	display: inline-block;
+	text-indent: 1.25em;
 }
 #counter {
-  font-size: x-large;
-  padding-bottom: 0.05em;
+	font-size: x-large;
+	padding-bottom: 0.05em;
 }
 #alphacounter {
-  font-size: x-large;
+	font-size: x-large;
 }
 #betacounter {
-  font-size: x-large;
+	font-size: x-large;
 }
 #divmbupcost {
-  display: inline-block;
-  text-indent: 6.5em;
+	display: inline-block;
+	text-indent: 6.5em;
 }
 #divmbmultcost {
-  display: inline-block;
-  text-indent: 5.75em;
+	display: inline-block;
+	text-indent: 5.75em;
 }
 #divalphaacceleratorcost {
-  display: inline-block;
+	display: inline-block;
 }
 #pcosttext {
-  display: inline-block;
-  text-indent: 4em;
+	display: inline-block;
+	text-indent: 4em;
 }
 #divbetaacceleratorcost {
-  display: inline-block;
+	display: inline-block;
 }
 #gcosttext {
-  display: inline-block;
-  text-indent: 2.3em;
+	display: inline-block;
+	text-indent: 2.3em;
 }
 #divgenboost {
-  display: inline-block;
+	display: inline-block;
 }
 #divgbuptcost {
-  display: inline-block;
-  text-indent: 7.5em;
+	display: inline-block;
+	text-indent: 7.5em;
 }
 #divgbupmcost {
-  display: inline-block;
-  text-indent: 4.75em;
+	display: inline-block;
+	text-indent: 4.75em;
 }
 #divthreeboostcost {
-  display: inline-block;
+	display: inline-block;
 }
 #divperbangcost {
-  display: inline-block;
-  text-indent: 7.25em;
+	display: inline-block;
+	text-indent: 7.25em;
 }
 .redb {
-  background: transparent !important;
-  border: 2px solid rgb(237, 100, 100) !important;
-  width: 75%;
-  font-size: large;
+	background: transparent !important;
+	border: 2px solid rgb(237, 100, 100) !important;
+	width: 75%;
+	font-size: large;
 }
 .blueb {
-  background: transparent !important;
-  border: 2px solid cornflowerblue !important;
-  width: 75%;
-  font-size: large;
+	background: transparent !important;
+	border: 2px solid cornflowerblue !important;
+	width: 75%;
+	font-size: large;
 }
 /* .redb:hover {
-  color: #FF00FF
+	color: #FF00FF
 }
 .redb:active {
-  color: #0099FF
+	color: #0099FF
 } */
 #stat {
-  word-break:break-all;
+	word-break:break-all;
 }
 #divunlockpca {
-  display: inline-block;
+	display: inline-block;
 }
 #divupgradepcacost {
-  display: inline-block;
+	display: inline-block;
 }
 #divboosterupcost {
-  display: inline-block;
+	display: inline-block;
 }
 #divboosteruppercentcost {
-  display: inline-block;
-  text-indent: 15em;
+	display: inline-block;
+	text-indent: 15em;
 }
 #divboostsacrificecost {
-  display: inline-block;
+	display: inline-block;
 }
 #boostsac2 {
-  display: inline-block;
+	display: inline-block;
 }
 #boostsection {
-  flex: space-evenly;
-  flex-direction: row;
-  gap: 2.375em
+	flex: space-evenly;
+	flex-direction: row;
+	gap: 2.375em
 }
 #nbnb {
-  flex: space-evenly;
-  flex-direction: row;
-  gap: 1.5em
+	flex: space-evenly;
+	flex-direction: row;
+	gap: 1.5em
 }
 #divbau {
-  display: inline-block
+	display: inline-block
 }
 #divupgradeba {
-  display: inline-block;
+	display: inline-block;
 }
 #divtoggleba {
-  display: inline-block;
-  text-indent: 6em;
+	display: inline-block;
+	text-indent: 6em;
 }
 #bnbn {
-  display: flex;
-  flex: space-evenly;
-  flex-direction: row;
-  gap: 1.5em
+	display: flex;
+	flex: space-evenly;
+	flex-direction: row;
+	gap: 1.5em
 }
 #gboostdouble {
-  display: inline-block;
+	display: inline-block;
 }
 #alphamachinedouble {
-  display: inline-block;
-  text-indent: 7.4em;
+	display: inline-block;
+	text-indent: 7.4em;
 }
 .button {
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid black;
-  box-shadow: none;
-  font-weight: 500;
-  cursor: pointer;
-  background: linear-gradient(45deg, black, transparent);
-  color: snow;
+	padding: 8px;
+	border-radius: 8px;
+	border: 1px solid black;
+	box-shadow: none;
+	font-weight: 500;
+	cursor: pointer;
+	background: linear-gradient(45deg, black, transparent);
+	color: snow;
 }
 .tabopener {
-  padding-left: 0.7em;
-  padding-right: 0.7em;
-  padding-top: 0.35em;
-  padding-bottom: 0.35em;
-  font-size: 18px;
+	padding-left: 0.7em;
+	padding-right: 0.7em;
+	padding-top: 0.35em;
+	padding-bottom: 0.35em;
+	font-size: 18px;
 }
 body {
-  display:flex;
-  flex-direction: column;
-  align-items: center;
+	display:flex;
+	flex-direction: column;
+	align-items: center;
 }
 * {
-  text-align: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	text-align: center;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 #boostsection {
-  display:flex;
-  justify-content: center;
+	display:flex;
+	justify-content: center;
 }
 #bangshow {
-  display:flex;
-  justify-content: center;
+	display:flex;
+	justify-content: center;
 }
 #bangcenteringfix {
-  display:flex;
-  justify-content: center;
+	display:flex;
+	justify-content: center;
 }
 #mergecenteringfix {
-  display:flex;
-  justify-content: center;
+	display:flex;
+	justify-content: center;
 }
 #veryouterboost {
-  border:0.2em solid #333333; 
-  padding-left: 15px; 
-  padding-right: 15px;
-  padding-bottom: 10px; 
-  display:none; 
-  border-radius: 10px
+	border:0.2em solid #333333; 
+	padding-left: 15px; 
+	padding-right: 15px;
+	padding-bottom: 10px; 
+	display:none; 
+	border-radius: 10px
 }
 #nuclearshow {
-  display:none;
-  border:0.2em solid #333333; 
-  padding-left: 15px; 
-  padding-bottom: 10px; 
-  padding-right: 15px; 
-  border-radius: 10px
+	display:none;
+	border:0.2em solid #333333; 
+	padding-left: 15px; 
+	padding-bottom: 10px; 
+	padding-right: 15px; 
+	border-radius: 10px
 }
 #bangshow {
-  display:none; 
+	display:none; 
 }
 #mergeshow {
-  display:none; 
+	display:none; 
 }
 #nuclearalphashow {
-  display:none; 
+	display:none; 
 }
 .withtheoutline {
-  border:0.2em solid #333333; 
-  padding-left: 15px; 
-  padding-bottom: 10px; 
-  padding-right: 15px; 
-  border-radius: 10px
+	border:0.2em solid #333333; 
+	padding-left: 15px; 
+	padding-bottom: 10px; 
+	padding-right: 15px; 
+	border-radius: 10px
 }
 #nextfeature {
-  font-size:larger;
-  padding-bottom:0.3em;
+	font-size:larger;
+	padding-bottom:0.3em;
 }
 #autosaving {
-  display:inline-block;
+	display:inline-block;
 }
 #divspeedparticlecost {
-  display: inline-block;
+	display: inline-block;
 }
 #divmachinecost {
-  display: inline-block;
-  text-indent: 2em;
+	display: inline-block;
+	text-indent: 2em;
 }
 #experimentoggle {
-  display:inline-block;
-  text-indent: 1em;
+	display:inline-block;
+	text-indent: 1em;
 }
 #devtoggle {
-  display:inline-block;
-  text-indent: 10em;
+	display:inline-block;
+	text-indent: 10em;
 }
 #divmergespeedcost {
-  display:inline-block;
+	display:inline-block;
 }
 #divpermergecost {
-  display:inline-block;
-  text-indent: 3em;
+	display:inline-block;
+	text-indent: 3em;
 }
 .flexycentering {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3em;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	gap: 3em;
 }
 #flexyreactor {
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1em;
 }
 .flexyreactorcosts {
-  display: flex;
-  gap: 9em;
+	display: flex;
+	gap: 9em;
 }
 html {background-color: black}
+.button-card {
+	border-radius: 22px;
+	background-color: whitesmoke;
+	color: #3d3d3d;
+	cursor: pointer;
+	padding: 10px;
+	width: 45%;
+}
+.button-card > * {
+	margin-left: 10px;
+	margin-top: 10px;
+	text-align: left;
+}
+.util-inlineblock {
+	display: inline-block;
+}
+.floating-action-button {
+	background-color: #004c8b;
+	color: #64b4ed;
+	border-radius: 16px;
+	/* padding: 16px; */
+	width: 64px;
+	height: 64px;
+	border: none;
+}
+.floating-action-button.page {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}
+.floating-action-button.single-icon {
+	font-size: 24px;
+	font-weight: bold;
+}
+.floating-action-button:hover {
+	background-color: #0061b0;
+}
+.floating-action-button:active {
+	border: 2px solid white;
+	background-color: #005fad;
+}
